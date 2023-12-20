@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "@nestjs/apollo": "^12.0.11",
-    "@nmxjs/api": "^1.0.0",
+    "@nmxjs/api": "^1.0.1",
     "@nmxjs/config": "^1.0.0",
     "compression": "^1.7.4",
     "helmet": "^7.1.0"

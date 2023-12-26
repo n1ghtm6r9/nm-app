@@ -321,6 +321,14 @@
     iterare "1.2.1"
     tslib "2.6.2"
 
+"@nestjs/microservices@^10.3.0":
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-10.3.0.tgz#3c9262d926d8b56eed6373756f4a3e54466fb7d7"
+  integrity sha512-CZj27dEN4Rh6t9cRXv5EEg+HwkOUk02DDdS7x4eLcphnP4wgsLNDEo8vQ2gbQHFGpZhLUyeeynjNGkpV9T3+og==
+  dependencies:
+    iterare "1.2.1"
+    tslib "2.6.2"
+
 "@nestjs/typeorm@^10.0.1":
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-10.0.1.tgz#0b5c36c21a06c274f9d283e73988b887e7f0635b"
@@ -328,19 +336,27 @@
   dependencies:
     uuid "9.0.1"
 
-"@nmxjs/api@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.0.1.tgz#5d7a6e7e229a8f37b2a7b0566167351822f07540"
-  integrity sha512-S4YMp+9vxh//Ydlxf94msWWJNYJ47XcXVwiWzDanKQ7Su9hNS8eBgWE/Zd7ozdqz/K8H4J78VkNnJU+pcGeO0g==
+"@nmxjs/api@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.4.tgz#556659ac9ed8f9fc8db53f8fe51155e83c095e0c"
+  integrity sha512-NQnrLCh8AtAN01jEZXRafS8Mdj0S2d6gSQ17hEdQFuAx/wzX9NuubsSt6Qcja9gA+tXCCmTMByWBl0xw7iUOHg==
   dependencies:
     "@nestjs/common" "^10.2.10"
-    "@nmxjs/config" "^1.0.0"
+    "@nestjs/graphql" "^12.0.11"
+    "@nmxjs/config" "^1.0.4"
+    "@nmxjs/errors" "^1.0.3"
     "@nmxjs/utils" "^1.0.0"
+    deepmerge "^4.3.1"
+    express "^4.18.2"
+    node-cache "^5.1.2"
+    object-hash "^3.0.0"
+    reflect-metadata "^0.2.1"
+    rxjs "^7.8.1"
 
-"@nmxjs/config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@nmxjs/config/-/config-1.0.0.tgz#45a28d3550d62330173025de6e4bdd01a69bef7e"
-  integrity sha512-3kcvdpTz18cxtAq/bWgaeWw1ZNg+n8nTbA7PxY6gUr68h+CzACghtYORQcsJaXM5bImR+bQWVIMPhDfauiDHog==
+"@nmxjs/config@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@nmxjs/config/-/config-1.0.4.tgz#a4cac330ecee05a87729502c0a0d3171fba55194"
+  integrity sha512-5VCD8UgRImPWjr8lhXJ18MegjXH89BUzV/AuQlwBv86ElhzDkZBjaEuI+sWn0hLsqtuqhgAvIT/D2zhA9LE56w==
   dependencies:
     "@nmxjs/types" "^1.0.0"
     "@nmxjs/utils" "^1.0.0"
@@ -357,6 +373,17 @@
   integrity sha512-utMBW1RFi6KgmrKFWmb4MrP7mFPjJHYJondXw8POgUYPAdJkaxDarbflEUEjsrg1m8S9SwiNOcNLEGYepM3s+A==
   dependencies:
     "@nestjs/microservices" "^10.2.10"
+
+"@nmxjs/events@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.2.tgz#fed90f7060d5677b48f865fbb6ee8b9de323d637"
+  integrity sha512-6y9BhIKhvx0IKO7SeW37dRjsUpgxbtTuXMlsNkih+3qUif2ZWbbal7pzjuDOhi6SdTbSeamOBRPczGtzMV+k3w==
+  dependencies:
+    "@nestjs/common" "^10.2.10"
+    "@nestjs/microservices" "^10.3.0"
+    "@nmxjs/config" "^1.0.4"
+    "@nmxjs/errors" "^1.0.3"
+    rxjs "^7.8.1"
 
 "@nmxjs/types@^1.0.0":
   version "1.0.0"
@@ -814,6 +841,11 @@ cliui@^8.0.1:
     strip-ansi "^6.0.1"
     wrap-ansi "^7.0.0"
 
+clone@2.x:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+  integrity sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==
+
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -926,6 +958,11 @@ debug@^4.3.4:
   dependencies:
     ms "2.1.2"
 
+deepmerge@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
+  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
+
 define-data-property@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/define-data-property/-/define-data-property-1.1.1.tgz#c35f7cd0ab09883480d12ac5cb213715587800b3"
@@ -995,7 +1032,7 @@ eventemitter3@^3.1.0:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
 
-express@^4.17.1:
+express@^4.17.1, express@^4.18.2:
   version "4.18.2"
   resolved "https://registry.yarnpkg.com/express/-/express-4.18.2.tgz#3fabe08296e930c796c19e3c516979386ba9fd59"
   integrity sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==
@@ -1416,6 +1453,13 @@ node-abort-controller@^3.1.1:
   resolved "https://registry.yarnpkg.com/node-abort-controller/-/node-abort-controller-3.1.1.tgz#a94377e964a9a37ac3976d848cb5c765833b8548"
   integrity sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==
 
+node-cache@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/node-cache/-/node-cache-5.1.2.tgz#f264dc2ccad0a780e76253a694e9fd0ed19c398d"
+  integrity sha512-t1QzWwnk4sjLWaQAS8CHgOJ+RAfmHpxFWmc36IWTiWHQfs0w5JDMBS1b1ZxQteo0vVVuWJvIUKHDkkeK7vIGCg==
+  dependencies:
+    clone "2.x"
+
 node-fetch@^2.6.1, node-fetch@^2.6.7:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
@@ -1432,6 +1476,11 @@ object-assign@^4, object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
+
+object-hash@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object-hash/-/object-hash-3.0.0.tgz#73f97f753e7baffc0e2cc9d6e079079744ac82e9"
+  integrity sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==
 
 object-inspect@^1.9.0:
   version "1.13.1"
@@ -1550,6 +1599,11 @@ reflect-metadata@^0.1.13, reflect-metadata@^0.1.14:
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.14.tgz#24cf721fe60677146bb77eeb0e1f9dece3d65859"
   integrity sha512-ZhYeb6nRaXCfhnndflDK8qI6ZQ/YcWZCISRAWICW9XYqMUwjZM9Z0DveWX/ABN01oxSHwVxKQmxeYZSsm0jh5A==
+
+reflect-metadata@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.2.1.tgz#8d5513c0f5ef2b4b9c3865287f3c0940c1f67f74"
+  integrity sha512-i5lLI6iw9AU3Uu4szRNPPEkomnkjRTaVt9hy/bn5g/oSzekBSMeLZblcjP74AW0vBabqERLLIrz+gR8QYR54Tw==
 
 regenerator-runtime@^0.14.0:
   version "0.14.0"

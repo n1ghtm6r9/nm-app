@@ -1,4 +1,6 @@
-import { RpcExceptionInterceptor, getGrpcOptionsKey, GetGrpcOptions } from '@nmxjs/api';
+import { configKey, IConfig } from '@nmxjs/config';
+import { RpcExceptionInterceptor, getTransporterOptionsKey, GetTransporterOptions } from '@nmxjs/api';
+import { eventsClientKey, IEventsClient } from '@nmxjs/events';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { INestApplication, Logger } from '@nestjs/common';
@@ -10,9 +12,16 @@ export async function createNestApp(serviceName: string, module: any) {
 
   if (!isWorker) {
     app.useGlobalInterceptors(new RpcExceptionInterceptor());
-    const getGrpcOptions: GetGrpcOptions = app.get(getGrpcOptionsKey);
+    const config = app.get<IConfig>(configKey);
+    const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
+    const transporterOptions = app.get<GetTransporterOptions>(getTransporterOptionsKey)(serviceName);
 
-    const microserviceApps = [app.connectMicroservice<MicroserviceOptions>(getGrpcOptions(serviceName), { inheritAppConfig: true })];
+    const microserviceApps = [
+      app.connectMicroservice<MicroserviceOptions>(transporterOptions, { inheritAppConfig: true }),
+      ...(eventsOptions && eventsOptions.transport !== transporterOptions.transport
+        ? [app.connectMicroservice<MicroserviceOptions>(eventsOptions, { inheritAppConfig: true })]
+        : []),
+    ];
     await app.init();
     await Promise.all(microserviceApps.map(microserviceApp => microserviceApp.listen()));
   } else {

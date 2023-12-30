@@ -5,8 +5,9 @@ import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { INestApplication, Logger } from '@nestjs/common';
 import { isWorkerApp } from '@nmxjs/utils';
+import { ICreateNestAppOptions } from './interfaces';
 
-export async function createNestApp(serviceName: string, module: any) {
+export async function createNestApp({ service, module }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
   const app = <INestApplication>await NestFactory[isWorker ? 'createApplicationContext' : 'create'](module);
 
@@ -14,7 +15,7 @@ export async function createNestApp(serviceName: string, module: any) {
     app.useGlobalInterceptors(new RpcExceptionInterceptor());
     const config = app.get<IConfig>(configKey);
     const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
-    const transporterOptions = app.get<GetTransporterOptions>(getTransporterOptionsKey)(serviceName);
+    const transporterOptions = app.get<GetTransporterOptions>(getTransporterOptionsKey)(service);
 
     const microserviceApps = [
       app.connectMicroservice<MicroserviceOptions>(transporterOptions, { inheritAppConfig: true }),
@@ -28,5 +29,5 @@ export async function createNestApp(serviceName: string, module: any) {
     await app.init();
   }
 
-  Logger.log(`Microservice "${serviceName}${process.env.BOOT_MODE ? `-${process.env.BOOT_MODE}` : ''}" started!`);
+  Logger.log(`Microservice "${service}${process.env.BOOT_MODE ? `-${process.env.BOOT_MODE}` : ''}" started!`);
 }

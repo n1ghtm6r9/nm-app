@@ -4,8 +4,9 @@ import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
+import { ICreateNestAppOptions } from './interfaces';
 
-export async function createNestHttpApp(serviceName: string, module: any) {
+export async function createNestHttpApp({ service, module }: ICreateNestAppOptions) {
   const app = await NestFactory.create(module);
 
   if (getEnvironment() === EnvironmentEnum.PRODUCTION) {
@@ -16,5 +17,5 @@ export async function createNestHttpApp(serviceName: string, module: any) {
   const port = process.env.PORT || 3000;
   await app.listen(port);
 
-  Logger.log(`Http service ${serviceName} started on port "${port}"!`);
+  Logger.log(`Http service ${service} started on port "${port}"!`);
 }

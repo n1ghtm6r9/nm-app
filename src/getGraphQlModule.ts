@@ -2,8 +2,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { GraphQLModule } from '@nestjs/graphql';
+import { IGetGraphQlModuleOptions } from './interfaces';
 
-export const getGraphQlModule = () =>
+export const getGraphQlModule = ({ onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleOptions = {}) =>
   GraphQLModule.forRootAsync<ApolloDriverConfig>({
     driver: ApolloDriver,
     useFactory: () => ({
@@ -28,6 +29,16 @@ export const getGraphQlModule = () =>
           error.extensions.exception?.thrownValue?.message ||
           error.toString(),
       }),
+      ...(onSubscriptionConnect || onSubscriptionDisconnect
+        ? {
+            subscriptions: {
+              'subscriptions-transport-ws': {
+                ...(onSubscriptionConnect ? { onConnect: onSubscriptionConnect } : {}),
+                ...(onSubscriptionDisconnect ? { onDisconnect: onSubscriptionDisconnect } : {}),
+              },
+            },
+          }
+        : {}),
       context: ctx => ({
         req: ctx.req,
         res: ctx.res,

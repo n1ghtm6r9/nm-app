@@ -1,3 +1,4 @@
+import GraphQLJSON from 'graphql-type-json';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
@@ -10,7 +11,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions) =>
     ...(options?.imports?.length ? { imports: options.imports } : {}),
     driver: ApolloDriver,
     useFactory: async (...params) => {
-      const { origin, onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleUseFactoryResult = options?.useFactory
+      const { origin, resolvers, onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleUseFactoryResult = options?.useFactory
         ? await options.useFactory(...params)
         : {};
       return {
@@ -21,6 +22,10 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions) =>
         cors: {
           credentials: true,
           origin: [origin || process.env.ORIGIN || '*'],
+        },
+        resolvers: {
+          JSON: GraphQLJSON,
+          ...resolvers,
         },
         formatError: (error: any) => ({
           ...(error.extensions.exception?.error?.code

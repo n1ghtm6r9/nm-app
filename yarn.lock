@@ -336,10 +336,10 @@
   dependencies:
     uuid "9.0.1"
 
-"@nmxjs/api@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.7.tgz#091a60e71c49d0575a1047a1890d6b479882d9aa"
-  integrity sha512-jf3DZvF2ckN5ae9DCse/y6zLmimN6pBh/BD+CIC/DqnwqOWXHOS89/qRPMrZcwoQXmd9rOwZh31hI+8T2/yq3g==
+"@nmxjs/api@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.8.tgz#4b0113ebbac1a42a3521a5efe39ff02b90b87913"
+  integrity sha512-HTuI6pAUg4xLsN4s3yI/fDFFssWIi2U8o6whFJEgAU4BxhPOtEcxtyrrOIOst3RhR3Wq8YpELMXxcaIC/7NZVQ==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/graphql" "^12.0.11"

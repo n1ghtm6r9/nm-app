@@ -374,10 +374,10 @@
   dependencies:
     "@nestjs/microservices" "^10.2.10"
 
-"@nmxjs/events@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.3.tgz#5cdc09d0b1e398a23dd5a992c2af331ea65e05a9"
-  integrity sha512-yktsVKGWd7YM1PRc17JGOpRQL2xblyL93rX6xANERyBKTSElo2iY2serRkilO/5BsNk1GC4N9RoBcYyH0tRzug==
+"@nmxjs/events@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.4.tgz#9f965591b09b6002b2b571b95283327ef55d8b4b"
+  integrity sha512-CwJR1rFwyahqsoXtY9eK0eRvySEAEALUV3zRflTunHg8RQYKHmuXY3MOh7uA/AyU/dTDB+u2Q5c00EPZgJmxnQ==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/microservices" "^10.3.0"

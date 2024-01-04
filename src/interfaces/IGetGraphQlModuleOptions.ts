@@ -1,6 +1,7 @@
-import { ICallback } from '@nmxjs/types';
+import { ModuleMetadata } from '@nestjs/common';
+import { IGetGraphQlModuleUseFactoryResult } from './IGetGraphQlModuleUseFactoryResult';
 
-export interface IGetGraphQlModuleOptions {
-  onSubscriptionConnect?: ICallback<Record<string, string>>;
-  onSubscriptionDisconnect?: ICallback<Record<string, string>>;
+export interface IGetGraphQlModuleOptions extends Pick<ModuleMetadata, 'imports'> {
+  inject?: Array<string | symbol>;
+  useFactory: (...params) => IGetGraphQlModuleUseFactoryResult | Promise<IGetGraphQlModuleUseFactoryResult>;
 }

@@ -527,12 +527,19 @@
     "@nmxjs/errors" "^1.0.3"
     rxjs "^7.8.1"
 
-"@nmxjs/types@^1.0.0", "@nmxjs/types@^1.0.2":
+"@nmxjs/types@^1.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.2.tgz#a45c92845edad230d44b527714ea5a53c22d8316"
   integrity sha512-Xt4798PhhubLqZ8AYSvPSxaHyQZ7NURotWIx3UJTdGIz+4uPypMZupy2kH8AP2+9/4YTuL4v3Rz6B5t8ClL1jw==
   dependencies:
     "@nmxjs/validation" "^1.0.3"
+
+"@nmxjs/types@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.3.tgz#5ca8f6aba1168ce88788498c1c02db84e5be6d9d"
+  integrity sha512-A6GuS09Y05uzun8dTQyLmuDoWhaLk8CM+SBh529TLEV++180DHS17gTcoLLek99PkH565juA/ozbUsAGACgW6A==
+  dependencies:
+    "@nmxjs/validation" "^1.0.4"
 
 "@nmxjs/utils@^1.0.0":
   version "1.0.3"
@@ -554,6 +561,20 @@
     "@nestjs/common" "^10.2.10"
     "@nestjs/core" "^10.2.10"
     "@nestjs/graphql" "^12.0.11"
+    "@nmxjs/errors" "^1.0.3"
+    class-transformer "^0.5.1"
+    class-validator "^0.14.0"
+    graphql-type-json "^0.3.2"
+    reflect-metadata "^0.1.14"
+
+"@nmxjs/validation@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@nmxjs/validation/-/validation-1.0.4.tgz#3a86ce6884e11d63fce35d38fe5f90f5a523d994"
+  integrity sha512-nerP7sKt1VEjCgvS0Ar51szInaHZ3Ahfx+CQfgbApzQqJscFFyUZ2N2VA/1KgsYl5bpLz7UI+Aw4dxE0MO6FOA==
+  dependencies:
+    "@nestjs/common" "^10.2.10"
+    "@nestjs/core" "^10.2.10"
+    "@nestjs/graphql" "^10.1.2"
     "@nmxjs/errors" "^1.0.3"
     class-transformer "^0.5.1"
     class-validator "^0.14.0"

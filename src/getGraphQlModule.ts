@@ -19,6 +19,9 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions) =>
         autoSchemaFile: true,
         installSubscriptionHandlers: true,
         playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
+        resolverValidationOptions: {
+          requireResolversToMatchSchema: 'ignore',
+        },
         cors: {
           credentials: true,
           origin: [origin || process.env.ORIGIN || '*'],

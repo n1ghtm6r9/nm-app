@@ -336,10 +336,10 @@
   dependencies:
     uuid "9.0.1"
 
-"@nmxjs/api@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.4.tgz#556659ac9ed8f9fc8db53f8fe51155e83c095e0c"
-  integrity sha512-NQnrLCh8AtAN01jEZXRafS8Mdj0S2d6gSQ17hEdQFuAx/wzX9NuubsSt6Qcja9gA+tXCCmTMByWBl0xw7iUOHg==
+"@nmxjs/api@^1.1.7":
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.7.tgz#091a60e71c49d0575a1047a1890d6b479882d9aa"
+  integrity sha512-jf3DZvF2ckN5ae9DCse/y6zLmimN6pBh/BD+CIC/DqnwqOWXHOS89/qRPMrZcwoQXmd9rOwZh31hI+8T2/yq3g==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/graphql" "^12.0.11"
@@ -374,10 +374,10 @@
   dependencies:
     "@nestjs/microservices" "^10.2.10"
 
-"@nmxjs/events@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.2.tgz#fed90f7060d5677b48f865fbb6ee8b9de323d637"
-  integrity sha512-6y9BhIKhvx0IKO7SeW37dRjsUpgxbtTuXMlsNkih+3qUif2ZWbbal7pzjuDOhi6SdTbSeamOBRPczGtzMV+k3w==
+"@nmxjs/events@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.3.tgz#5cdc09d0b1e398a23dd5a992c2af331ea65e05a9"
+  integrity sha512-yktsVKGWd7YM1PRc17JGOpRQL2xblyL93rX6xANERyBKTSElo2iY2serRkilO/5BsNk1GC4N9RoBcYyH0tRzug==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/microservices" "^10.3.0"

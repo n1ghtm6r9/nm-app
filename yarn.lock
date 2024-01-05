@@ -364,15 +364,15 @@
   dependencies:
     uuid "9.0.1"
 
-"@nmxjs/api@^1.1.10":
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.10.tgz#d59473d694f7b61e4abc10a8c6bf1ec9f247108c"
-  integrity sha512-forHy1aE+/6E+8snU/gvST9xbeWFxQ29Wmt5/QaVp9+clcC0uBJJ3tEpIsZMmdbfIoVvWGToOt2uG4itmQKIkQ==
+"@nmxjs/api@^1.1.11":
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.11.tgz#191d984b25025ab5c91c9dda0f4d195456c1ee9e"
+  integrity sha512-tBlF2auAK8SvCZha5EOFcxCkB1bmkXk4H0zKmKhzIPH29q48H2y8YKoq/Im0Gfd5/cLY2wMKLPut2oUIE639uA==
   dependencies:
     "@nestjs/common" "^10.2.10"
-    "@nmxjs/config" "^1.0.5"
+    "@nmxjs/config" "^1.0.7"
     "@nmxjs/errors" "^1.0.3"
-    "@nmxjs/utils" "^1.0.4"
+    "@nmxjs/utils" "^1.0.6"
     deepmerge "^4.3.1"
     express "^4.18.2"
     node-cache "^5.1.2"

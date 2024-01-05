@@ -1,12 +1,14 @@
 import GraphQLJSON from 'graphql-type-json';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { DynamicModule } from '@nestjs/common';
+import { ApolloDriver } from '@nestjs/apollo';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
-import { GraphQLModule } from '@nestjs/graphql';
 import { IGetGraphQlModuleOptions, IGetGraphQlModuleUseFactoryResult } from './interfaces';
 
-export const getGraphQlModule = (options?: IGetGraphQlModuleOptions) =>
-  GraphQLModule.forRootAsync<ApolloDriverConfig>({
+const { GraphQLModule } = require('@nestjs/graphql');
+
+export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicModule =>
+  GraphQLModule.forRootAsync({
     ...(options?.inject?.length ? { inject: options.inject } : {}),
     ...(options?.imports?.length ? { imports: options.imports } : {}),
     driver: ApolloDriver,

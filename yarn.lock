@@ -389,6 +389,15 @@
     "@nmxjs/utils" "^1.0.4"
     class-transformer "^0.5.1"
 
+"@nmxjs/config@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@nmxjs/config/-/config-1.0.6.tgz#8527154b2d3f778cdc6bed6bac222950485dde21"
+  integrity sha512-xA1Jffwk4E1t9QG3mqujS7v9nIi6sDFMzQiOz++fcgSH+3aONyX7Ty+4TEk7EJ46LLTDDd9LR3MVG/sUOshmZQ==
+  dependencies:
+    "@nmxjs/types" "^1.0.6"
+    "@nmxjs/utils" "^1.0.5"
+    class-transformer "^0.5.1"
+
 "@nmxjs/constants@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
@@ -419,6 +428,13 @@
   dependencies:
     "@nmxjs/validation" "^1.0.6"
 
+"@nmxjs/types@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.6.tgz#780fbd64ac81a1b784439514e777f4edb4ce0b77"
+  integrity sha512-pCDPX1E0e0iLwQT9mjwgtQEk63icitInbYQQBFIQXhdtmP5icKspMK15hHvtvLPPvyZSAsCM4smYXxO6cYzcsQ==
+  dependencies:
+    "@nmxjs/validation" "^1.0.7"
+
 "@nmxjs/utils@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.4.tgz#4b332040d9c0b75b506674a1a0c8826c80f67e71"
@@ -432,10 +448,36 @@
     uuid "^9.0.1"
     yaml "^2.3.4"
 
+"@nmxjs/utils@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.5.tgz#aab3b5d4ff43dd0e52180e01a295cc3707e52086"
+  integrity sha512-brwKlH/iIWdkY0v+xkhM7nRRSs/CgrHcgNkbtHy8Jsqvo8BzqSaBrBgsxHGFuo3sw/vbA/6dWS/PqAVW/SJNSg==
+  dependencies:
+    "@nmxjs/constants" "^1.0.1"
+    "@nmxjs/types" "^1.0.6"
+    big.js "^6.2.1"
+    moment "^2.29.4"
+    rxjs "^7.8.1"
+    uuid "^9.0.1"
+    yaml "^2.3.4"
+
 "@nmxjs/validation@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@nmxjs/validation/-/validation-1.0.6.tgz#44b621992b85a9a0f78c2c171fad835dcfca86b6"
   integrity sha512-risu0CLZzQfgveqrK14J8U2jN7OR6zOPGo91j7iMVv5XziwNx2d77HRv1SeQDDzBdLYbEqalp5QZlq3ycgNhVA==
+  dependencies:
+    "@nestjs/common" "^10.2.10"
+    "@nestjs/core" "^10.2.10"
+    "@nmxjs/errors" "^1.0.3"
+    class-transformer "^0.5.1"
+    class-validator "^0.14.0"
+    graphql-type-json "^0.3.2"
+    reflect-metadata "^0.1.14"
+
+"@nmxjs/validation@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@nmxjs/validation/-/validation-1.0.7.tgz#9fe691ed79365453b2184ed298014e53a5e32d6e"
+  integrity sha512-RGP7PQKq/DBEJ4fYftJkoJwP4Da1W0+lf49f8zASoebaLGkzhAiRdtqkrPuVhOUKsGbpgch5UB1aHURuZZ+5vw==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/core" "^10.2.10"

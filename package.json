@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,7 +32,7 @@
     "@nmxjs/api": "^1.1.8",
     "@nmxjs/config": "^1.0.4",
     "@nmxjs/events": "^1.0.4",
-    "@nmxjs/types": "^1.0.3",
+    "@nmxjs/types": "^1.0.5",
     "apollo-server-express": "^3.10.2",
     "compression": "^1.7.4",
     "graphql": "^16.6.0",
@@ -40,19 +40,6 @@
     "graphql-type-json": "^0.3.2",
     "graphql-ws": "^5.11.2",
     "helmet": "^7.1.0",
-    "typeorm": "^0.3.10",
-    "@nestjs/graphql": "^10.1.2"
-  },
-  "peerDependencies": {
-    "@apollo/server": "^4.9.5",
-    "@nestjs/apollo": "^10.1.0",
-    "@nestjs/typeorm": "^10.0.0",
-    "@nmxjs/api": "^1.1.8",
-    "@nmxjs/config": "^1.0.4",
-    "@nmxjs/events": "^1.0.4",
-    "@nmxjs/types": "^1.0.4",
-    "apollo-server-express": "^3.10.2",
-    "typeorm": "^0.3.10",
-    "@nestjs/graphql": "^10.1.2"
+    "typeorm": "^0.3.10"
   }
 }

@@ -380,15 +380,6 @@
     reflect-metadata "^0.2.1"
     rxjs "^7.8.1"
 
-"@nmxjs/config@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@nmxjs/config/-/config-1.0.5.tgz#32617e7334de8c01ff16c887515f4f580910447b"
-  integrity sha512-m/ztGqjjsCEio4KrbxTHMa5jy4gYYW2LxUVlP81LmCB3hIPw2uaE4xsgLvn39D5aVwAYREPWrXEveAVoijRDRA==
-  dependencies:
-    "@nmxjs/types" "^1.0.5"
-    "@nmxjs/utils" "^1.0.4"
-    class-transformer "^0.5.1"
-
 "@nmxjs/config@^1.0.7":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@nmxjs/config/-/config-1.0.7.tgz#47b08e54140a1d4c305e471a0862dbd448ea9a32"
@@ -410,23 +401,16 @@
   dependencies:
     "@nestjs/microservices" "^10.2.10"
 
-"@nmxjs/events@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.5.tgz#86be8451d6b88fe90515ff36c37aa02323bf8df5"
-  integrity sha512-m8LgTesaf/28vG6aozwLcryQJmQgtWJt2+MytCG/4XLdbJYh3ZWam+Oh5RIAn+uLbpjcz2GD7MuvVjYIf6fauQ==
+"@nmxjs/events@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.6.tgz#70572524988af15cbb45a585479f054e396be880"
+  integrity sha512-a9fXZL+mHN+TYgPfXhBn+mZuTk5fS6g5ogyhrxhjzcIMRigdp5T28nUNXVfBJsQt9t/++fzsEU5A0BhHRK8Www==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nestjs/microservices" "^10.3.0"
-    "@nmxjs/config" "^1.0.5"
+    "@nmxjs/config" "^1.0.7"
     "@nmxjs/errors" "^1.0.3"
     rxjs "^7.8.1"
-
-"@nmxjs/types@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.5.tgz#c3bcbce15f8f7053c0d59f40e2f2629b378212a1"
-  integrity sha512-bA8pLTmtZ36BWI7+oVv5pDLVVWwuiZjwBys3a83ewVw2n7mp5m21B4sygwWjx673bWXrlwVG9ovya853ooAg/A==
-  dependencies:
-    "@nmxjs/validation" "^1.0.6"
 
 "@nmxjs/types@^1.0.7":
   version "1.0.7"
@@ -434,19 +418,6 @@
   integrity sha512-0PFior2TYNHMjxDswAGQL3TNJi3+6Czj3JgXuB7rkKPW1ShQwJGBTrTUXbszm1XBHYegLBhqF95rRr1oR4xgvg==
   dependencies:
     "@nmxjs/validation" "^1.0.8"
-
-"@nmxjs/utils@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.4.tgz#4b332040d9c0b75b506674a1a0c8826c80f67e71"
-  integrity sha512-PQFrFlZTQIDzaZduZVtCwgEQ6Ea+3cA+c/A7DiN6tJmtLGkIY5tbwp4VLGNVUqoFKwdp+E+FENqXkpLrad223A==
-  dependencies:
-    "@nmxjs/constants" "^1.0.1"
-    "@nmxjs/types" "^1.0.5"
-    big.js "^6.2.1"
-    moment "^2.29.4"
-    rxjs "^7.8.1"
-    uuid "^9.0.1"
-    yaml "^2.3.4"
 
 "@nmxjs/utils@^1.0.6":
   version "1.0.6"
@@ -460,19 +431,6 @@
     rxjs "^7.8.1"
     uuid "^9.0.1"
     yaml "^2.3.4"
-
-"@nmxjs/validation@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@nmxjs/validation/-/validation-1.0.6.tgz#44b621992b85a9a0f78c2c171fad835dcfca86b6"
-  integrity sha512-risu0CLZzQfgveqrK14J8U2jN7OR6zOPGo91j7iMVv5XziwNx2d77HRv1SeQDDzBdLYbEqalp5QZlq3ycgNhVA==
-  dependencies:
-    "@nestjs/common" "^10.2.10"
-    "@nestjs/core" "^10.2.10"
-    "@nmxjs/errors" "^1.0.3"
-    class-transformer "^0.5.1"
-    class-validator "^0.14.0"
-    graphql-type-json "^0.3.2"
-    reflect-metadata "^0.1.14"
 
 "@nmxjs/validation@^1.0.8":
   version "1.0.8"

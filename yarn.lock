@@ -364,10 +364,10 @@
   dependencies:
     uuid "9.0.1"
 
-"@nmxjs/api@^1.1.14":
-  version "1.1.14"
-  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.14.tgz#ca4d6d28500dee48243b204d5be12edb65cec0f5"
-  integrity sha512-9SUiLKUzT0xocmqo/uc03XqSeuinPMpBXv+ip90OhhEzRPXBXskp5W55RLegOXXUuzWZBeq2OO0Btj6IQKCtbQ==
+"@nmxjs/api@^1.1.15":
+  version "1.1.15"
+  resolved "https://registry.yarnpkg.com/@nmxjs/api/-/api-1.1.15.tgz#89a21eef03571d1e2f1c46fd92f76ec6319d458f"
+  integrity sha512-LrAOH8CiwUORiZEOUh7RZZ6LgjdVZjVTU8sn4kifUdJ4iSUxytDM9K/FyPCVYLV6gYOjJ+AurDXIark7LaIUUg==
   dependencies:
     "@nestjs/common" "^10.2.10"
     "@nmxjs/errors" "^1.0.3"

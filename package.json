@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "@nestjs/apollo": "^10.1.0",
     "@nestjs/core": "^10.3.0",
     "@nestjs/typeorm": "^10.0.0",
-    "@nmxjs/api": "^1.1.14",
+    "@nmxjs/api": "^1.1.15",
     "@nmxjs/events": "^1.0.7",
     "@nmxjs/types": "^1.0.8",
     "apollo-server-express": "^3.10.2",

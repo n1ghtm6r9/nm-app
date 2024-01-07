@@ -13,3 +13,11 @@ declare module '@nmxjs/config' {
   }
   const configKey: string;
 }
+
+declare module '@nmxjs/api' {
+  const RpcExceptionInterceptor: any;
+  const getTransporterOptionsKey: string;
+  type GetTransporterOptions = (
+    serviceName: string,
+  ) => Exclude<import('@nestjs/microservices').MicroserviceOptions, import('@nestjs/microservices').CustomStrategy>;
+}

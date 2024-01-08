@@ -21,3 +21,10 @@ declare module '@nmxjs/api' {
     serviceName: string,
   ) => Exclude<import('@nestjs/microservices').MicroserviceOptions, import('@nestjs/microservices').CustomStrategy>;
 }
+
+declare module '@nmxjs/events' {
+  const eventsClientKey: string;
+  interface IEventsClient {
+    options: Exclude<import('@nestjs/microservices').MicroserviceOptions, import('@nestjs/microservices').CustomStrategy>;
+  }
+}

@@ -328,7 +328,7 @@
     lodash.omit "4.5.0"
     tslib "2.5.0"
 
-"@nestjs/common@^10.2.10", "@nestjs/common@^10.3.0":
+"@nestjs/common@^10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-10.3.0.tgz#d78f0ff2062d1d53c79c170a79c12a1548e2e598"
   integrity sha512-DGv34UHsZBxCM3H5QGE2XE/+oLJzz5+714JQjBhjD9VccFlQs3LRxo/epso4l7nJIiNlZkPyIUC8WzfU/5RTsQ==
@@ -349,7 +349,7 @@
     path-to-regexp "3.2.0"
     tslib "2.6.2"
 
-"@nestjs/microservices@^10.2.10", "@nestjs/microservices@^10.3.0":
+"@nestjs/microservices@^10.3.0":
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-10.3.0.tgz#3c9262d926d8b56eed6373756f4a3e54466fb7d7"
   integrity sha512-CZj27dEN4Rh6t9cRXv5EEg+HwkOUk02DDdS7x4eLcphnP4wgsLNDEo8vQ2gbQHFGpZhLUyeeynjNGkpV9T3+og==
@@ -368,23 +368,6 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
-
-"@nmxjs/errors@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.3.tgz#c82a826de393bfe8cbd6f36e7113a5821b0dc1d1"
-  integrity sha512-utMBW1RFi6KgmrKFWmb4MrP7mFPjJHYJondXw8POgUYPAdJkaxDarbflEUEjsrg1m8S9SwiNOcNLEGYepM3s+A==
-  dependencies:
-    "@nestjs/microservices" "^10.2.10"
-
-"@nmxjs/events@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@nmxjs/events/-/events-1.0.7.tgz#f6d444d31cca39809d3ed3221d263a6d4972a8db"
-  integrity sha512-ChSt0uOFG5qjhxSBuehkhY7gY7Og30CAxt15A2T6FV92G1RCZMUj235vCJ+RIME9w13b5FMvkAZs78HJayqPrw==
-  dependencies:
-    "@nestjs/common" "^10.2.10"
-    "@nestjs/microservices" "^10.3.0"
-    "@nmxjs/errors" "^1.0.3"
-    rxjs "^7.8.1"
 
 "@nmxjs/types@^1.0.8":
   version "1.0.8"

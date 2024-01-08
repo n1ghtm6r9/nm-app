@@ -7,6 +7,7 @@ import { Logger } from '@nestjs/common';
 import { ICreateNestAppOptions } from './interfaces';
 import { configKey, IConfig } from '@nmxjs/config';
 import { eventsClientKey, IEventsClient } from '@nmxjs/events';
+import { MicroserviceOptions } from '@nestjs/microservices';
 
 export async function createNestHttpApp({ service, module }: ICreateNestAppOptions) {
   const app = await NestFactory.create(module);
@@ -23,7 +24,7 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
   const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
 
   if (eventsOptions) {
-    await app.connectMicroservice(eventsOptions).listen();
+    await app.connectMicroservice<MicroserviceOptions>(eventsOptions).listen();
   }
 
   Logger.log(`Http service ${service} started on port "${port}"!`);

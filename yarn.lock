@@ -369,19 +369,19 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
 
-"@nmxjs/types@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.8.tgz#51c69534613201fff4f6d8f858c2f0d16b420c39"
-  integrity sha512-0DeXUJbV4fHm+JuLUAnp56GGoxUkgDn/mWgN++DWK4SKaPu5Hbljhy/1eQ281NWiYG2xmQj2H4/vsdBDOLph8Q==
+"@nmxjs/types@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.9.tgz#d888b555137e6950a8875b3091a3b7053710eca4"
+  integrity sha512-HhKbttJDWzU5xNNNye/LG2ISpAJRdYXLtI3lwOcqPAE7ij4rHpe5e8inpI1R3bjoNpdysBG6MmY+QnMvY/qAUg==
 
-"@nmxjs/utils@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.7.tgz#5cf149662ad80a8237955cd9c73d05b91ae923c1"
-  integrity sha512-6SXT51tGB0I2g4A0JRGrwdx601hliFt1iwE0xa3opjQdKny+uPeUUNKca4sx05ShR4jHreWLj5DEoFxzxzz8Mg==
+"@nmxjs/utils@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.10.tgz#adf1ca78855cd427334e7cb0ea06e4fdf4c14e3e"
+  integrity sha512-/3yLaN+CQ07tTGqCO02vuDp/lEwyUOrqdryzmsZudq7ZzpFnTOo8R7MgKZyO9FJr4U2bDC2W197LIgWN13D/eA==
   dependencies:
     "@nestjs/common" "^10.3.0"
     "@nmxjs/constants" "^1.0.1"
-    "@nmxjs/types" "^1.0.8"
+    "@nmxjs/types" "^1.0.9"
     big.js "^6.2.1"
     moment "^2.29.4"
     rxjs "^7.8.1"

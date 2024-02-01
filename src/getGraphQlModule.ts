@@ -1,10 +1,10 @@
 import GraphQLJSON from 'graphql-type-json';
 import { DynamicModule } from '@nestjs/common';
-import { ApolloDriver } from '@nestjs/apollo';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { IGetGraphQlModuleOptions, IGetGraphQlModuleUseFactoryResult } from './interfaces';
 
+const { ApolloDriver } = require('@nestjs/apollo');
 const { GraphQLModule } = require('@nestjs/graphql');
 
 export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicModule =>

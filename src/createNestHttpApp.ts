@@ -17,7 +17,14 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
   }
 
   app.use(compression());
+
   const port = process.env.PORT || 3000;
+
+  app.enableCors({
+    credentials: true,
+    origin: process.env.CORS_ORIGIN || '*',
+  });
+
   await app.listen(port);
 
   const config = app.get<IConfig>(configKey);

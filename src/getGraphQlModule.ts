@@ -13,18 +13,13 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
     ...(options?.imports?.length ? { imports: options.imports } : {}),
     driver: ApolloDriver,
     useFactory: async (...params) => {
-      const { origin, resolvers, onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleUseFactoryResult = options?.useFactory
+      const { resolvers, onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleUseFactoryResult = options?.useFactory
         ? await options.useFactory(...params)
         : {};
       return {
-        debug: false,
         autoSchemaFile: true,
         installSubscriptionHandlers: true,
         playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
-        cors: {
-          credentials: true,
-          origin: [origin || process.env.ORIGIN || '*'],
-        },
         resolvers: {
           JSON: GraphQLJSON,
           ...resolvers,

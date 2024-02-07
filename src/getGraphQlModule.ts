@@ -1,4 +1,3 @@
-import GraphQLJSON from 'graphql-type-json';
 import { DynamicModule } from '@nestjs/common';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
@@ -21,7 +20,6 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         installSubscriptionHandlers: true,
         playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
         resolvers: {
-          JSON: GraphQLJSON,
           ...resolvers,
         },
         formatError: (error: any) => ({

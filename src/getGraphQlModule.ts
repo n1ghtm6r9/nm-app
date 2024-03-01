@@ -33,6 +33,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
             error.extensions.exception?.error?.message ||
             error.extensions.exception?.message ||
             error.extensions.exception?.thrownValue?.message ||
+            error.message ||
             error.toString(),
         }),
         ...(onSubscriptionConnect || onSubscriptionDisconnect

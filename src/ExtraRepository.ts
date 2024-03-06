@@ -1,3 +1,4 @@
+import { camelToSnakeCase } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListRequestDto, ListResponseDto } from '@nmxjs/types';
 import { DataSource, Repository, Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, EntityTarget, In } from 'typeorm';
 
@@ -20,24 +21,26 @@ export class ExtraRepository<T> extends Repository<T> {
     }
 
     const where = filters.reduce((res, v) => {
+      const field = camelToSnakeCase(v.field);
+
       if (v.operator === FilterOperatorEnum.EQ) {
-        res[v.field] = v.values[0];
+        res[field] = v.values[0];
       } else if (v.operator === FilterOperatorEnum.IN) {
-        res[v.field] = In(v.values);
+        res[field] = In(v.values);
       } else if (v.operator === FilterOperatorEnum.LESS) {
-        res[v.field] = LessThan(v.values[0]);
+        res[field] = LessThan(v.values[0]);
       } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
-        res[v.field] = LessThanOrEqual(v.values[0]);
+        res[field] = LessThanOrEqual(v.values[0]);
       } else if (v.operator === FilterOperatorEnum.MORE) {
-        res[v.field] = MoreThan(v.values[0]);
+        res[field] = MoreThan(v.values[0]);
       } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
-        res[v.field] = MoreThanOrEqual(v.values[0]);
+        res[field] = MoreThanOrEqual(v.values[0]);
       } else if (v.operator === FilterOperatorEnum.LIKE) {
-        res[v.field] = Like(v.values[0]);
+        res[field] = Like(v.values[0]);
       }
 
       if (v.not) {
-        res[v.field] = Not(res[v.field]);
+        res[field] = Not(res[v.field]);
       }
 
       return res;

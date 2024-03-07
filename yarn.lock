@@ -382,11 +382,6 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
 
-"@nmxjs/types@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.10.tgz#857fcc73edfb5c01239b8e2040a9a4977d4a1514"
-  integrity sha512-jEJhNdWCN+bhEw7A7/82N9bF2dDi7pz4DsJU0Zz2YE/GJVQZTOxMM+MGbQk8q5lBMscMwoEa/SUTJRJ8mH8blw==
-
 "@nmxjs/types@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.9.tgz#d888b555137e6950a8875b3091a3b7053710eca4"

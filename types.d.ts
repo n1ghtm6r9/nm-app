@@ -28,21 +28,3 @@ declare module '@nmxjs/events' {
     options: Exclude<import('@nestjs/microservices').MicroserviceOptions, import('@nestjs/microservices').CustomStrategy>;
   }
 }
-
-declare module '@nmxjs/types' {
-  enum FilterOperatorEnum {
-    EQ = 'EQ',
-    IN = 'IN',
-    LIKE = 'LIKE',
-    LESS = 'LESS',
-    LESS_OR_EQ = 'LESS_OR_EQ',
-    MORE = 'MORE',
-    MORE_OR_EQ = 'MORE_OR_EQ',
-  }
-  enum EnvironmentEnum {
-    PRODUCTION = 'PRODUCTION,',
-  }
-  type ICallback<T> = any;
-  type ListRequestDto = any;
-  type ListResponseDto<T> = any;
-}

@@ -382,24 +382,13 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
 
-"@nmxjs/types@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.10.tgz#857fcc73edfb5c01239b8e2040a9a4977d4a1514"
-  integrity sha512-jEJhNdWCN+bhEw7A7/82N9bF2dDi7pz4DsJU0Zz2YE/GJVQZTOxMM+MGbQk8q5lBMscMwoEa/SUTJRJ8mH8blw==
-
-"@nmxjs/types@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@nmxjs/types/-/types-1.0.9.tgz#d888b555137e6950a8875b3091a3b7053710eca4"
-  integrity sha512-HhKbttJDWzU5xNNNye/LG2ISpAJRdYXLtI3lwOcqPAE7ij4rHpe5e8inpI1R3bjoNpdysBG6MmY+QnMvY/qAUg==
-
-"@nmxjs/utils@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.12.tgz#91cf1ee73546eee2f0a66d0c3ba57b7ecad7ab32"
-  integrity sha512-gl171en7I5q5Vkj38vY9wfZPxRGs/nTx2Nzwvvlxr0S4jDTST1H0tiHjIcc1i52+B6+jdlv4HoK0DHab+JSe5g==
+"@nmxjs/utils@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.13.tgz#e845aec2390c29b2ab826103369b956f84fa0ea9"
+  integrity sha512-YBRjHmU9OyX0y9oQ2CfOwTuP7KD0xUqvbLm1srlS51Z2aKqUBcd33C4etFPcZJFo8At4p0A1CDNCMDLQJ5NorA==
   dependencies:
     "@nestjs/common" "^10.3.0"
     "@nmxjs/constants" "^1.0.1"
-    "@nmxjs/types" "^1.0.9"
     bcrypt "^5.1.1"
     big.js "^6.2.1"
     moment "^2.29.4"

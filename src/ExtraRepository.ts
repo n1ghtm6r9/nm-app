@@ -1,15 +1,17 @@
 import { camelToSnakeCase } from '@nmxjs/utils';
-import { FilterOperatorEnum, ListRequestDto, ListResponseDto } from '@nmxjs/types';
+import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
 import { DataSource, Repository, Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, EntityTarget, In } from 'typeorm';
+import { IRepositoryListOptions } from './interfaces';
 
-export class ExtraRepository<T> extends Repository<T> {
+export class ExtraRepository<T extends object> extends Repository<T> {
   constructor(entity: EntityTarget<T>, dataSource: DataSource) {
     super(entity, dataSource.createEntityManager());
   }
 
-  public async list(options: ListRequestDto): Promise<ListResponseDto<T>> {
+  public async list(options: IRepositoryListOptions<T>): Promise<ListResponseDto<T>> {
     const filters = options.filters || [];
-    const builder = this.createQueryBuilder();
+    const relations = options.relations || [];
+    const builder = this.createQueryBuilder(this.metadata.tableName);
     const hasPagination = Boolean(options.pagination?.limit && options.pagination?.page);
 
     if (options.pagination?.limit) {
@@ -19,6 +21,10 @@ export class ExtraRepository<T> extends Repository<T> {
     if (hasPagination) {
       builder.offset((options.pagination.page - 1) * options.pagination.limit);
     }
+
+    relations.forEach(v => {
+      builder.leftJoinAndSelect(`${this.metadata.tableName}.${<string>v}`, <string>v);
+    });
 
     const where = filters.reduce((res, v) => {
       const field = camelToSnakeCase(v.field);

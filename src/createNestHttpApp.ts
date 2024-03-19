@@ -8,6 +8,7 @@ import { ICreateNestAppOptions } from './interfaces';
 import { configKey, IConfig } from '@nmxjs/config';
 import { eventsClientKey, IEventsClient } from '@nmxjs/events';
 import { MicroserviceOptions } from '@nestjs/microservices';
+import { GqlExceptionFilter } from './GqlExceptionFilter';
 
 export async function createNestHttpApp({ service, module }: ICreateNestAppOptions) {
   const app = await NestFactory.create(module);
@@ -24,6 +25,8 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
     credentials: true,
     origin: process.env.CORS_ORIGIN || '*',
   });
+
+  app.useGlobalFilters(new GqlExceptionFilter());
 
   await app.listen(port);
 

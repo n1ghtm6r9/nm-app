@@ -12,16 +12,17 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
     ...(options?.imports?.length ? { imports: options.imports } : {}),
     driver: ApolloDriver,
     useFactory: async (...params) => {
-      const { resolvers, onSubscriptionConnect, onSubscriptionDisconnect }: IGetGraphQlModuleUseFactoryResult = options?.useFactory
-        ? await options.useFactory(...params)
-        : {};
+      const {
+        resolvers = {},
+        onSubscriptionConnect,
+        onSubscriptionDisconnect,
+      }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
       return {
         autoSchemaFile: true,
         installSubscriptionHandlers: true,
         playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
-        resolvers: {
-          ...resolvers,
-        },
+        fieldResolverEnhancers: ['filters', 'guards', 'interceptors'],
+        resolvers,
         formatError: (error: any) => ({
           ...(error.extensions.exception?.error?.code
             ? { code: error.extensions.exception.error.code }

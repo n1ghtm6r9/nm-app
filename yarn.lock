@@ -370,6 +370,13 @@
     iterare "1.2.1"
     tslib "2.6.2"
 
+"@nestjs/testing@^10.3.4":
+  version "10.3.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-10.3.4.tgz#9b01e33097ae9a5f4f2ebb86a1438329dc845b83"
+  integrity sha512-g3NQnRUFBcYF+ySkB7INg5RiV7CNfkP5zwaf3NFo0WjhBrfih9f1jMZ/19blLZ4djN/ngulYks2E3lzROAW8RQ==
+  dependencies:
+    tslib "2.6.2"
+
 "@nestjs/typeorm@^10.0.0":
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-10.0.1.tgz#0b5c36c21a06c274f9d283e73988b887e7f0635b"

@@ -1,6 +1,6 @@
 import { camelToSnakeCase, clearUndefined } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
-import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In } from 'typeorm';
+import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions } from 'typeorm';
 import { ICrudListOptions, ICrudUpdateOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 
@@ -40,14 +40,15 @@ export class CrudService<E extends object, D extends object> {
     };
   }
 
-  public getOne = (id: string) =>
-    this.repository
-      .createQueryBuilder()
-      .where({ id })
-      .getOne()
-      .then(res => ({
-        item: this.repository.entityToDto(res),
-      }));
+  public get = (options?: FindManyOptions<E>) =>
+    this.repository.find(options).then(res => ({
+      items: res.map(v => this.repository.entityToDto.call(v)),
+    }));
+
+  public getOne = (id: string | FindOneOptions<E>) =>
+    this.repository.findOne(typeof id === 'string' ? <FindOneOptions>{ where: { id } } : id).then(res => ({
+      item: this.repository.entityToDto(res),
+    }));
 
   public delete = (ids: string[]) =>
     this.repository

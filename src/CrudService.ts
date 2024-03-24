@@ -7,15 +7,26 @@ import type { ExtraRepository } from './ExtraRepository';
 export class CrudService<E extends object, D extends object> {
   constructor(protected readonly repository: ExtraRepository<E, D>) {}
 
-  public create = (options: Partial<E>) =>
+  public create = (payload: Partial<E>) =>
     this.repository
       .createQueryBuilder()
       .insert()
-      .values(<any>clearUndefined(options))
+      .values(<any>clearUndefined(payload))
       .returning(['id'])
       .execute()
       .then(res => ({
         id: <string>res.raw[0].id,
+      }));
+
+  public createMany = (payload: Partial<E>[]) =>
+    this.repository
+      .createQueryBuilder()
+      .insert()
+      .values(<any>payload.map(v => clearUndefined(v)))
+      .returning(['id'])
+      .execute()
+      .then(res => ({
+        ids: <string[]>res.raw.map(v => v.id),
       }));
 
   public async update({ id, payload }: ICrudUpdateOptions<E>) {

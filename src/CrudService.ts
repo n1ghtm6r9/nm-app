@@ -1,7 +1,7 @@
 import { camelToSnakeCase, clearUndefined } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
 import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
-import { ICrudListOptions, ICrudUpdateOptions } from './interfaces';
+import { ICrudListOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 
 export class CrudService<E extends object, D extends object> {
@@ -29,7 +29,7 @@ export class CrudService<E extends object, D extends object> {
         ids: <string[]>res.raw.map(v => v.id),
       }));
 
-  public async update({ id, payload }: ICrudUpdateOptions<E>) {
+  public async update(idOrOptions: string | FindOptionsWhere<E>, payload: Partial<E>) {
     if (!Object.values(payload).length) {
       return {
         ok: false,
@@ -39,9 +39,13 @@ export class CrudService<E extends object, D extends object> {
     const ok = await this.repository
       .createQueryBuilder()
       .update()
-      .where({
-        id,
-      })
+      .where(
+        typeof idOrOptions === 'string'
+          ? {
+              id: idOrOptions,
+            }
+          : idOrOptions,
+      )
       .set(<any>clearUndefined(payload))
       .execute()
       .then(res => res.affected > 0);

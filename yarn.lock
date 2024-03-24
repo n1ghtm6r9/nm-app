@@ -389,10 +389,10 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
 
-"@nmxjs/utils@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.13.tgz#e845aec2390c29b2ab826103369b956f84fa0ea9"
-  integrity sha512-YBRjHmU9OyX0y9oQ2CfOwTuP7KD0xUqvbLm1srlS51Z2aKqUBcd33C4etFPcZJFo8At4p0A1CDNCMDLQJ5NorA==
+"@nmxjs/utils@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.14.tgz#cdd8b76648662849e71c496fa893d60828f9a31c"
+  integrity sha512-W7BTYo4lj1238mFBZjo9301cisQcSx2uvYLj6lKUdSQjmnhqk5nmojfqQGCb2GT6uV7DK3pGpKXg3nmTh9xPig==
   dependencies:
     "@nestjs/common" "^10.3.0"
     "@nmxjs/constants" "^1.0.1"

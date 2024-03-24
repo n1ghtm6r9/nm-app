@@ -1,4 +1,4 @@
-import { camelToSnakeCase } from '@nmxjs/utils';
+import { camelToSnakeCase, clearUndefined } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
 import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In } from 'typeorm';
 import { ICrudListOptions, ICrudUpdateOptions } from './interfaces';
@@ -11,7 +11,7 @@ export class CrudService<E extends object, D extends object> {
     this.repository
       .createQueryBuilder()
       .insert()
-      .values(<any>options)
+      .values(<any>clearUndefined(options))
       .returning(['id'])
       .execute()
       .then(res => ({
@@ -31,7 +31,7 @@ export class CrudService<E extends object, D extends object> {
       .where({
         id,
       })
-      .set(payload)
+      .set(<any>clearUndefined(payload))
       .execute()
       .then(res => res.affected > 0);
 

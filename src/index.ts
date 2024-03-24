@@ -5,6 +5,7 @@ export * from './getTypeOrmModule';
 export * from './getGraphQlModule';
 export * from './createNestHttpApp';
 export * from './createTestNestApp';
+export * from './CrudService';
 export * from './ExtraRepository';
 export * from './GqlExceptionFilter';
 export * from './createTestNestHttpApp';

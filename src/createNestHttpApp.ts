@@ -1,6 +1,6 @@
 import helmet from 'helmet';
 import * as compression from 'compression';
-import { getEnvironment } from '@nmxjs/utils';
+import { getEnvironment, parseJson } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
@@ -23,7 +23,11 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
 
   app.enableCors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN || '*',
+    origin:
+      parseJson({
+        data: process.env.ORIGINS,
+        arrayValid: true,
+      }) || '*',
   });
 
   app.useGlobalFilters(new GqlExceptionFilter());

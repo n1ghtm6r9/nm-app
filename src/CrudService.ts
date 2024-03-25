@@ -30,7 +30,7 @@ export class CrudService<E extends object, D extends object> {
       }));
 
   public async update(idOrOptions: string | FindOptionsWhere<E>, payload: Partial<E>) {
-    if (!Object.values(payload).length) {
+    if (!idOrOptions || !Object.values(payload).length) {
       return {
         ok: false,
       };
@@ -61,9 +61,11 @@ export class CrudService<E extends object, D extends object> {
     }));
 
   public getOne = (idOrOptions: string | FindOneOptions<E>) =>
-    this.repository.findOne(typeof idOrOptions === 'string' ? <FindOneOptions>{ where: { id: idOrOptions } } : idOrOptions).then(res => ({
-      item: this.repository.entityToDto(res),
-    }));
+    !idOrOptions
+      ? Promise.resolve({ item: <D>null })
+      : this.repository.findOne(typeof idOrOptions === 'string' ? <FindOneOptions>{ where: { id: idOrOptions } } : idOrOptions).then(res => ({
+          item: this.repository.entityToDto(res),
+        }));
 
   public delete = (idsOrOptions: string[] | FindOptionsWhere<E>) =>
     this.repository

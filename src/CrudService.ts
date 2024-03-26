@@ -57,7 +57,7 @@ export class CrudService<E extends object, D extends object> {
 
   public get = (options?: FindManyOptions<E>) =>
     this.repository.find(options).then(res => ({
-      items: res.map(v => this.repository.entityToDto.call(v)),
+      items: res.map((v): D => this.repository.entityToDto.call(v)),
     }));
 
   public getOne = (idOrOptions: string | FindOneOptions<E>) =>

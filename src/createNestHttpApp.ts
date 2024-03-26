@@ -22,7 +22,6 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
   const port = process.env.PORT || 3000;
 
   app.enableCors({
-    credentials: true,
     origin:
       parseJson({
         data: process.env.ORIGINS,

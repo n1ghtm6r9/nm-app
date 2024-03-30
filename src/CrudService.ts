@@ -70,6 +70,7 @@ export class CrudService<E extends object, D extends object> {
   public delete = (idsOrOptions: string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
     this.repository
       .createQueryBuilder()
+      .delete()
       .where(Array.isArray(idsOrOptions) && typeof idsOrOptions[0] === 'string' ? { id: In(<string[]>idsOrOptions) } : idsOrOptions)
       .execute()
       .then(res => ({

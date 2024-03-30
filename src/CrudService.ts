@@ -94,31 +94,34 @@ export class CrudService<E extends object, D extends object> {
       builder.leftJoinAndSelect(`${this.repository.metadata.tableName}.${<string>v}`, <string>v);
     });
 
-    const where = filters.reduce((res, v) => {
-      const field = camelToSnakeCase(v.field);
+    const where = {
+      ...filters.reduce((res, v) => {
+        const field = camelToSnakeCase(v.field);
 
-      if (v.operator === FilterOperatorEnum.EQ) {
-        res[field] = v.values[0];
-      } else if (v.operator === FilterOperatorEnum.IN) {
-        res[field] = In(v.values);
-      } else if (v.operator === FilterOperatorEnum.LESS) {
-        res[field] = LessThan(v.values[0]);
-      } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
-        res[field] = LessThanOrEqual(v.values[0]);
-      } else if (v.operator === FilterOperatorEnum.MORE) {
-        res[field] = MoreThan(v.values[0]);
-      } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
-        res[field] = MoreThanOrEqual(v.values[0]);
-      } else if (v.operator === FilterOperatorEnum.LIKE) {
-        res[field] = Like(v.values[0]);
-      }
+        if (v.operator === FilterOperatorEnum.EQ) {
+          res[field] = v.values[0];
+        } else if (v.operator === FilterOperatorEnum.IN) {
+          res[field] = In(v.values);
+        } else if (v.operator === FilterOperatorEnum.LESS) {
+          res[field] = LessThan(v.values[0]);
+        } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
+          res[field] = LessThanOrEqual(v.values[0]);
+        } else if (v.operator === FilterOperatorEnum.MORE) {
+          res[field] = MoreThan(v.values[0]);
+        } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
+          res[field] = MoreThanOrEqual(v.values[0]);
+        } else if (v.operator === FilterOperatorEnum.LIKE) {
+          res[field] = Like(v.values[0]);
+        }
 
-      if (v.not) {
-        res[field] = Not(res[v.field]);
-      }
+        if (v.not) {
+          res[field] = Not(res[v.field]);
+        }
 
-      return res;
-    }, {});
+        return res;
+      }, {}),
+      ...options.where,
+    };
 
     options.sorts?.forEach((v, i) => {
       if (i === 0) {

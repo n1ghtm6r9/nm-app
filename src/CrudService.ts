@@ -29,7 +29,7 @@ export class CrudService<E extends object, D extends object> {
         ids: <string[]>res.raw.map(v => v.id),
       }));
 
-  public async update(idOrOptions: string | FindOptionsWhere<E>, payload: Partial<E>) {
+  public async update(idOrOptions: string | FindOptionsWhere<E> | FindOptionsWhere<E>[], payload: Partial<E>) {
     if (!idOrOptions || !Object.values(payload).length) {
       return {
         ok: false,
@@ -67,10 +67,10 @@ export class CrudService<E extends object, D extends object> {
           item: this.repository.entityToDto(res),
         }));
 
-  public delete = (idsOrOptions: string[] | FindOptionsWhere<E>) =>
+  public delete = (idsOrOptions: string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
     this.repository
       .createQueryBuilder()
-      .where(Array.isArray(idsOrOptions) ? { id: In(idsOrOptions) } : idsOrOptions)
+      .where(Array.isArray(idsOrOptions) && typeof idsOrOptions[0] === 'string' ? { id: In(<string[]>idsOrOptions) } : idsOrOptions)
       .execute()
       .then(res => ({
         ok: res.affected > 0,
@@ -94,34 +94,31 @@ export class CrudService<E extends object, D extends object> {
       builder.leftJoinAndSelect(`${this.repository.metadata.tableName}.${<string>v}`, <string>v);
     });
 
-    const where = {
-      ...filters.reduce((res, v) => {
-        const field = camelToSnakeCase(v.field);
+    let where = filters.reduce((res, v) => {
+      const field = camelToSnakeCase(v.field);
 
-        if (v.operator === FilterOperatorEnum.EQ) {
-          res[field] = v.values[0];
-        } else if (v.operator === FilterOperatorEnum.IN) {
-          res[field] = In(v.values);
-        } else if (v.operator === FilterOperatorEnum.LESS) {
-          res[field] = LessThan(v.values[0]);
-        } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
-          res[field] = LessThanOrEqual(v.values[0]);
-        } else if (v.operator === FilterOperatorEnum.MORE) {
-          res[field] = MoreThan(v.values[0]);
-        } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
-          res[field] = MoreThanOrEqual(v.values[0]);
-        } else if (v.operator === FilterOperatorEnum.LIKE) {
-          res[field] = Like(v.values[0]);
-        }
+      if (v.operator === FilterOperatorEnum.EQ) {
+        res[field] = v.values[0];
+      } else if (v.operator === FilterOperatorEnum.IN) {
+        res[field] = In(v.values);
+      } else if (v.operator === FilterOperatorEnum.LESS) {
+        res[field] = LessThan(v.values[0]);
+      } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
+        res[field] = LessThanOrEqual(v.values[0]);
+      } else if (v.operator === FilterOperatorEnum.MORE) {
+        res[field] = MoreThan(v.values[0]);
+      } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
+        res[field] = MoreThanOrEqual(v.values[0]);
+      } else if (v.operator === FilterOperatorEnum.LIKE) {
+        res[field] = Like(v.values[0]);
+      }
 
-        if (v.not) {
-          res[field] = Not(res[v.field]);
-        }
+      if (v.not) {
+        res[field] = Not(res[v.field]);
+      }
 
-        return res;
-      }, {}),
-      ...options.where,
-    };
+      return res;
+    }, {});
 
     options.sorts?.forEach((v, i) => {
       if (i === 0) {
@@ -130,6 +127,15 @@ export class CrudService<E extends object, D extends object> {
         builder.addOrderBy(v.field, v.type);
       }
     });
+
+    if (Array.isArray(options.where)) {
+      where = [where, ...options.where];
+    } else if (options.where) {
+      where = {
+        ...where,
+        ...options.where,
+      };
+    }
 
     const [totalCount, items] = await Promise.all([
       this.repository.createQueryBuilder().where(where).getCount(),

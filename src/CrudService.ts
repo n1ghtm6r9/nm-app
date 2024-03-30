@@ -129,7 +129,7 @@ export class CrudService<E extends object, D extends object> {
     });
 
     if (Array.isArray(options.where)) {
-      where = [where, ...options.where];
+      where = [...(Object.keys(where).length ? [where] : []), ...options.where];
     } else if (options.where) {
       where = {
         ...where,

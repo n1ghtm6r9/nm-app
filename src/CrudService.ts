@@ -122,7 +122,7 @@ export class CrudService<E extends object, D extends object> {
 
     if (Array.isArray(findOptions.where)) {
       findOptions.where = [...(Object.keys(where).length ? [where] : []), ...findOptions.where];
-    } else if (options.where) {
+    } else if (findOptions.where) {
       findOptions.where = {
         ...where,
         ...findOptions.where,

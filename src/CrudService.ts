@@ -79,7 +79,7 @@ export class CrudService<E extends object, D extends object> {
 
   public async list(options: ICrudListOptions<E>): Promise<ListResponseDto<D>> {
     const filters = options.filters || [];
-    const relations = options.relations || [];
+    const relations = options.relations || {};
     const builder = this.repository.createQueryBuilder(this.repository.metadata.tableName);
     const hasPagination = Boolean(options.pagination?.limit && options.pagination?.page);
 
@@ -91,8 +91,12 @@ export class CrudService<E extends object, D extends object> {
       builder.offset((options.pagination.page - 1) * options.pagination.limit);
     }
 
-    relations.forEach(v => {
-      builder.leftJoinAndSelect(`${this.repository.metadata.tableName}.${<string>v}`, <string>v);
+    Object.keys(relations).forEach(key => {
+      if (!relations[key]) {
+        return;
+      }
+
+      builder.leftJoinAndSelect(`${this.repository.metadata.tableName}.${key}`, key);
     });
 
     let where = filters.reduce((res, v) => {

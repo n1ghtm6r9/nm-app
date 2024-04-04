@@ -1,7 +1,7 @@
 import { ListRequestDto } from '@nmxjs/types';
-import { FindOptionsWhere } from 'typeorm';
+import { FindOptionsRelations, FindOptionsWhere } from 'typeorm';
 
 export interface ICrudListOptions<E extends object> extends ListRequestDto {
-  relations?: Array<keyof E>;
+  relations?: FindOptionsRelations<E>;
   where?: FindOptionsWhere<E> | FindOptionsWhere<E>[];
 }

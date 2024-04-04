@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.64",
+  "version": "1.0.65",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,8 +32,9 @@
     "@nestjs/microservices": "^10.3.0",
     "@nestjs/testing": "^10.3.4",
     "@nestjs/typeorm": "^10.0.0",
-    "@nmxjs/utils": "^1.0.14",
+    "@nmxjs/constants": "^1.0.4",
     "@nmxjs/errors": "^1.0.7",
+    "@nmxjs/utils": "^1.0.14",
     "apollo-server-express": "^3.10.2",
     "compression": "^1.7.4",
     "graphql": "^16.6.0",
@@ -49,6 +50,6 @@
     "@nmxjs/api": "^1.1.16",
     "@nmxjs/config": "^1.0.8",
     "@nmxjs/events": "^1.0.9",
-    "@nmxjs/types": "^1.0.10"
+    "@nmxjs/types": "^1.0.11"
   }
 }

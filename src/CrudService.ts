@@ -3,6 +3,7 @@ import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
 import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
 import { ICrudListOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
+import { paginationLimit } from '@nmxjs/constants';
 
 export class CrudService<E extends object, D extends object> {
   constructor(protected readonly repository: ExtraRepository<E, D>) {}
@@ -77,27 +78,17 @@ export class CrudService<E extends object, D extends object> {
         ok: res.affected > 0,
       }));
 
-  public async list(options: ICrudListOptions<E>): Promise<ListResponseDto<D>> {
-    const filters = options.filters || [];
-    const relations = options.relations || {};
-    const builder = this.repository.createQueryBuilder(this.repository.metadata.tableName);
-    const hasPagination = Boolean(options.pagination?.limit && options.pagination?.page);
+  public async list({ filters = [], pagination, sorts, ...options }: ICrudListOptions<E> = {}): Promise<ListResponseDto<D>> {
+    const page = pagination?.page || 1;
+    const limit = pagination?.limit || paginationLimit;
 
-    if (options.pagination?.limit) {
-      builder.limit(options.pagination.limit);
-    }
-
-    if (hasPagination) {
-      builder.offset((options.pagination.page - 1) * options.pagination.limit);
-    }
-
-    Object.keys(relations).forEach(key => {
-      if (!relations[key]) {
-        return;
-      }
-
-      builder.leftJoinAndSelect(`${this.repository.metadata.tableName}.${key}`, key);
-    });
+    const findOptions: FindManyOptions<E> = {
+      ...options,
+      order: options.order || {},
+      where: options.where || {},
+      take: limit,
+      skip: Math.round((page - 1) * limit),
+    };
 
     let where = filters.reduce((res, v) => {
       const field = camelToSnakeCase(v.field);
@@ -125,33 +116,25 @@ export class CrudService<E extends object, D extends object> {
       return res;
     }, {});
 
-    options.sorts?.forEach((v, i) => {
-      if (i === 0) {
-        builder.orderBy(v.field, v.type);
-      } else {
-        builder.addOrderBy(v.field, v.type);
-      }
+    options.sorts?.forEach(v => {
+      findOptions.order[v.field] = v.type;
     });
 
-    if (Array.isArray(options.where)) {
-      where = [...(Object.keys(where).length ? [where] : []), ...options.where];
+    if (Array.isArray(findOptions.where)) {
+      findOptions.where = [...(Object.keys(where).length ? [where] : []), ...findOptions.where];
     } else if (options.where) {
-      where = {
+      findOptions.where = {
         ...where,
-        ...options.where,
+        ...findOptions.where,
       };
     }
 
     const [totalCount, items] = await Promise.all([
-      this.repository.createQueryBuilder().where(where).getCount(),
-      builder
-        .where(where)
-        .select('*')
-        .execute()
-        .then(res => res.map(v => this.repository.entityToDto(v))),
+      this.repository.count(findOptions),
+      this.repository.find(findOptions).then(res => res.map(v => this.repository.entityToDto(v))),
     ]);
-    const totalPages = hasPagination ? Math.ceil(totalCount / options.pagination.limit) : 1;
-    const nextPage = hasPagination ? options.pagination.page + 1 : undefined;
+    const nextPage = page + 1;
+    const totalPages = Math.ceil(totalCount / limit);
 
     return {
       items,

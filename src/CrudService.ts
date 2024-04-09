@@ -68,11 +68,17 @@ export class CrudService<E extends object, D extends object> {
           item: this.repository.entityToDto(res),
         }));
 
-  public delete = (idsOrOptions: string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
+  public delete = (idOrOptions: string | string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
     this.repository
       .createQueryBuilder()
       .delete()
-      .where(Array.isArray(idsOrOptions) && typeof idsOrOptions[0] === 'string' ? { id: In(<string[]>idsOrOptions) } : idsOrOptions)
+      .where(
+        typeof idOrOptions === 'string'
+          ? { id: idOrOptions }
+          : Array.isArray(idOrOptions) && typeof idOrOptions[0] === 'string'
+          ? { id: In(<string[]>idOrOptions) }
+          : idOrOptions,
+      )
       .execute()
       .then(res => ({
         ok: res.affected > 0,

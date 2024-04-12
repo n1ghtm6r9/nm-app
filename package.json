@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.67",
+  "version": "1.0.68",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -50,6 +50,6 @@
     "@nmxjs/api": "^1.1.16",
     "@nmxjs/config": "^1.0.8",
     "@nmxjs/events": "^1.0.9",
-    "@nmxjs/types": "^1.0.11"
+    "@nmxjs/types": "^1.0.15"
   }
 }

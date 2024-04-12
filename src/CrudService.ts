@@ -1,6 +1,6 @@
 import { camelToSnakeCase, clearUndefined } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
-import { Not, Like, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
+import { Raw, Not, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
 import { ICrudListOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 import { paginationLimit } from '@nmxjs/constants';
@@ -98,24 +98,27 @@ export class CrudService<E extends object, D extends object> {
 
     let where = filters.reduce((res, v) => {
       const field = camelToSnakeCase(v.field);
+      const value = JSON.parse(v.value);
 
       if (v.operator === FilterOperatorEnum.EQ) {
-        res[field] = v.values[0];
+        res[field] = value;
       } else if (v.operator === FilterOperatorEnum.IN) {
-        res[field] = In(v.values);
+        res[field] = In(value);
       } else if (v.operator === FilterOperatorEnum.LESS) {
-        res[field] = LessThan(v.values[0]);
+        res[field] = LessThan(value);
       } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
-        res[field] = LessThanOrEqual(v.values[0]);
+        res[field] = LessThanOrEqual(value);
       } else if (v.operator === FilterOperatorEnum.MORE) {
-        res[field] = MoreThan(v.values[0]);
+        res[field] = MoreThan(value);
       } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
-        res[field] = MoreThanOrEqual(v.values[0]);
-      } else if (v.operator === FilterOperatorEnum.LIKE) {
-        res[field] = Like(v.values[0]);
+        res[field] = MoreThanOrEqual(value);
+      } else if (v.operator === FilterOperatorEnum.SEARCH) {
+        res[field] = Raw(alias => `LOWER(${alias})${v.not ? 'NOT' : ''} LIKE :value`, {
+          value: `${value}%`.toLowerCase(),
+        });
       }
 
-      if (v.not) {
+      if (v.not && v.operator !== FilterOperatorEnum.SEARCH) {
         res[field] = Not(res[v.field]);
       }
 

@@ -43,6 +43,6 @@ declare module '@nmxjs/types' {
     LESS_OR_EQ,
     MORE,
     MORE_OR_EQ,
-    LIKE,
+    SEARCH,
   }
 }

@@ -27,6 +27,7 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
         data: process.env.ORIGINS,
         arrayValid: true,
       }) || '*',
+    credentials: true,
   });
 
   app.useGlobalFilters(new GqlExceptionFilter());

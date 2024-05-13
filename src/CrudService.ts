@@ -13,10 +13,10 @@ export class CrudService<E extends object, D extends object> {
       .createQueryBuilder()
       .insert()
       .values(<any>clearUndefined(payload))
-      .returning(['id'])
+      .returning('*')
       .execute()
       .then(res => ({
-        id: <string>res.raw[0].id,
+        item: this.repository.entityToDto(res.raw[0]),
       }));
 
   public createMany = (payload: Partial<E>[]) =>
@@ -24,10 +24,10 @@ export class CrudService<E extends object, D extends object> {
       .createQueryBuilder()
       .insert()
       .values(<any>payload.map(v => clearUndefined(v)))
-      .returning(['id'])
+      .returning('*')
       .execute()
       .then(res => ({
-        ids: <string[]>res.raw.map(v => v.id),
+        items: <D[]>res.raw.map(v => this.repository.entityToDto(v)),
       }));
 
   public async update(idOrOptions: string | FindOptionsWhere<E> | FindOptionsWhere<E>[], payload: Partial<E>) {
@@ -37,7 +37,7 @@ export class CrudService<E extends object, D extends object> {
       };
     }
 
-    const ok = await this.repository
+    const time: number = await this.repository
       .createQueryBuilder()
       .update()
       .where(
@@ -48,11 +48,19 @@ export class CrudService<E extends object, D extends object> {
           : idOrOptions,
       )
       .set(<any>clearUndefined(payload))
+      .returning(['updated_at'])
       .execute()
-      .then(res => res.affected > 0);
+      .then(res => res.raw[0]?.updated_at?.getTime());
+
+    if (!time) {
+      return {
+        ok: false,
+      };
+    }
 
     return {
-      ok,
+      ok: true,
+      time,
     };
   }
 

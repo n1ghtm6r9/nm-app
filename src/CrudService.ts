@@ -133,7 +133,7 @@ export class CrudService<E extends object, D extends object> {
       return res;
     }, {});
 
-    options.sorts?.forEach(v => {
+    sorts?.forEach(v => {
       findOptions.order[v.field] = v.type;
     });
 

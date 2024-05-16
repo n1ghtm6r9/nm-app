@@ -134,7 +134,7 @@ export class CrudService<E extends object, D extends object> {
     }, {});
 
     sorts?.forEach(v => {
-      findOptions.order[v.field] = v.type;
+      findOptions.order[camelToSnakeCase(v.field)] = v.type;
     });
 
     if (Array.isArray(findOptions.where)) {

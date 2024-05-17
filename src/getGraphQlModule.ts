@@ -6,6 +6,8 @@ import { IGetGraphQlModuleOptions, IGetGraphQlModuleUseFactoryResult } from './i
 const { ApolloDriver } = require('@nestjs/apollo');
 const { GraphQLModule } = require('@nestjs/graphql');
 
+const unexpectedErrorMessage = 'Unexpected error value: ';
+
 export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicModule =>
   GraphQLModule.forRootAsync({
     ...(options?.inject?.length ? { inject: options.inject } : {}),
@@ -37,6 +39,9 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
             error.extensions.exception?.thrownValue?.message ||
             error.message ||
             error.toString(),
+          ...(error.message.includes(unexpectedErrorMessage)
+            ? { message: eval(`eval(${error.message.substring(unexpectedErrorMessage.length)})`).message }
+            : {}),
         }),
         ...(onSubscriptionConnect || onSubscriptionDisconnect
           ? {

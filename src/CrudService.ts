@@ -1,4 +1,4 @@
-import { camelToSnakeCase, clearUndefined } from '@nmxjs/utils';
+import { camelToSnakeCase, clearUndefined, parseJson } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
 import { Raw, Not, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
 import { ICrudListOptions } from './interfaces';
@@ -106,7 +106,12 @@ export class CrudService<E extends object, D extends object> {
 
     let where = filters.reduce((res, v) => {
       const field = camelToSnakeCase(v.field);
-      const value = JSON.parse(v.value);
+
+      const value =
+        parseJson({
+          data: v.value,
+          arrayValid: true,
+        }) || v.value;
 
       if (v.operator === FilterOperatorEnum.EQ) {
         res[field] = value;

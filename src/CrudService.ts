@@ -163,7 +163,7 @@ export class CrudService<E extends object, D extends object> {
       cursor: {
         totalCount,
         totalPages,
-        ...(nextPage && nextPage < totalPages ? { nextPage } : {}),
+        ...(nextPage && nextPage <= totalPages ? { nextPage } : {}),
       },
     };
   }

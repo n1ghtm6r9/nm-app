@@ -1,6 +1,18 @@
 import { camelToSnakeCase, clearUndefined, parseJson } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
-import { Raw, Not, LessThan, LessThanOrEqual, MoreThan, MoreThanOrEqual, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
+import {
+  Raw,
+  Not,
+  LessThan,
+  LessThanOrEqual,
+  MoreThan,
+  MoreThanOrEqual,
+  In,
+  FindOneOptions,
+  FindManyOptions,
+  FindOptionsWhere,
+  IsNull,
+} from 'typeorm';
 import { ICrudListOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 import { paginationLimit } from '@nmxjs/constants';
@@ -113,7 +125,9 @@ export class CrudService<E extends object, D extends object> {
           arrayValid: true,
         }) || v.value;
 
-      if (v.operator === FilterOperatorEnum.EQ) {
+      if (value === null) {
+        res[field] = IsNull();
+      } else if (v.operator === FilterOperatorEnum.EQ) {
         res[field] = value;
       } else if (v.operator === FilterOperatorEnum.IN) {
         res[field] = In(value);

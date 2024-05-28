@@ -126,7 +126,7 @@ export class CrudService<E extends object, D extends object> {
         }) || v.value;
 
       if (value === 'null') {
-        res[field] = IsNull();
+        res[field] = v.not ? Not(IsNull()) : IsNull();
       } else if (v.operator === FilterOperatorEnum.EQ) {
         res[field] = value;
       } else if (v.operator === FilterOperatorEnum.IN) {
@@ -145,7 +145,7 @@ export class CrudService<E extends object, D extends object> {
         });
       }
 
-      if (v.not && v.operator !== FilterOperatorEnum.SEARCH) {
+      if (v.not && v.operator !== FilterOperatorEnum.SEARCH && value !== 'null') {
         res[field] = Not(res[v.field]);
       }
 
@@ -164,6 +164,8 @@ export class CrudService<E extends object, D extends object> {
         ...findOptions.where,
       };
     }
+
+    this.repository.createQueryBuilder().where(findOptions).getSql();
 
     const [totalCount, items] = await Promise.all([
       this.repository.count(findOptions),

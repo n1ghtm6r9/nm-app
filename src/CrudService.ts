@@ -125,7 +125,7 @@ export class CrudService<E extends object, D extends object> {
           arrayValid: true,
         }) || v.value;
 
-      if (value === null) {
+      if (value === 'null') {
         res[field] = IsNull();
       } else if (v.operator === FilterOperatorEnum.EQ) {
         res[field] = value;

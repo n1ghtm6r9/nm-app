@@ -165,8 +165,6 @@ export class CrudService<E extends object, D extends object> {
       };
     }
 
-    this.repository.createQueryBuilder().where(findOptions).getSql();
-
     const [totalCount, items] = await Promise.all([
       this.repository.count(findOptions),
       this.repository.find(findOptions).then(res => res.map(v => this.repository.entityToDto(v))),

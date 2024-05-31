@@ -1,7 +1,7 @@
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { IConfig, configKey } from '@nmxjs/config';
 
-export const getTypeOrmModule = () =>
+export const getTypeOrmModule = (options?: Partial<TypeOrmModuleOptions>) =>
   TypeOrmModule.forRootAsync({
     useFactory: (config: IConfig) => ({
       type: config.db.type,
@@ -13,6 +13,7 @@ export const getTypeOrmModule = () =>
       synchronize: true,
       autoLoadEntities: true,
       ...(config.db.options ? config.db.options : {}),
+      ...(options ? <any>options : {}),
     }),
     inject: [configKey],
   });

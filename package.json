@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.81",
+  "version": "1.0.82",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,6 +40,7 @@
     "graphql": "^16.6.0",
     "graphql-subscriptions": "^2.0.0",
     "graphql-type-json": "^0.3.2",
+    "graphql-upload-ts": "^2.1.2",
     "graphql-ws": "^5.11.2",
     "helmet": "^7.1.0",
     "typeorm": "^0.3.10"

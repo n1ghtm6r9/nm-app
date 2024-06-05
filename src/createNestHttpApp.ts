@@ -1,5 +1,6 @@
 import helmet from 'helmet';
 import * as compression from 'compression';
+import { graphqlUploadExpress } from 'graphql-upload-ts';
 import { getEnvironment, parseJson } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { NestFactory } from '@nestjs/core';
@@ -18,6 +19,7 @@ export async function createNestHttpApp({ service, module }: ICreateNestAppOptio
   }
 
   app.use(compression());
+  app.use(graphqlUploadExpress());
 
   const port = process.env.PORT || 3000;
 

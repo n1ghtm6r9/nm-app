@@ -3,7 +3,6 @@ export * from './logAppStarted';
 export * from './createNestApp';
 export * from './getTypeOrmModule';
 export * from './getGraphQlModule';
-export * from './createNestHttpApp';
 export * from './createTestNestApp';
 export * from './CrudService';
 export * from './ExtraRepository';

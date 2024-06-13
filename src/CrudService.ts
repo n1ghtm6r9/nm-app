@@ -75,6 +75,39 @@ export class CrudService<E extends object, D extends object> {
       time,
     };
   }
+  public async updateAndGet(idOrOptions: string | FindOptionsWhere<E> | FindOptionsWhere<E>[], payload: Partial<E>) {
+    if (!idOrOptions || !Object.values(payload).length) {
+      return {
+        ok: false,
+      };
+    }
+
+    const item = await this.repository
+      .createQueryBuilder()
+      .update()
+      .where(
+        typeof idOrOptions === 'string'
+          ? {
+              id: idOrOptions,
+            }
+          : idOrOptions,
+      )
+      .set(<any>clearUndefined(payload))
+      .returning('*')
+      .execute()
+      .then(res => res.raw[0]);
+
+    if (!item) {
+      return {
+        ok: false,
+      };
+    }
+
+    return {
+      ok: true,
+      item: this.repository.entityToDto(item),
+    };
+  }
 
   public get = (options?: FindManyOptions<E>) =>
     this.repository.find(options).then(res => ({

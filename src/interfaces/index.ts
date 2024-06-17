@@ -1,3 +1,4 @@
+export * from './IGetOneOptions';
 export * from './ICrudListOptions';
 export * from './ICreateNestAppOptions';
 export * from './IGetGraphQlModuleOptions';

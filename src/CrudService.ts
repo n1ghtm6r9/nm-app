@@ -13,9 +13,10 @@ import {
   FindOptionsWhere,
   IsNull,
 } from 'typeorm';
-import { ICrudListOptions } from './interfaces';
+import type { ICrudListOptions, IGetOneOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 import { paginationLimit } from '@nmxjs/constants';
+import { NotFoundError } from '@nmxjs/errors';
 
 export class CrudService<E extends object, D extends object> {
   constructor(protected readonly repository: ExtraRepository<E, D>) {}
@@ -114,12 +115,21 @@ export class CrudService<E extends object, D extends object> {
       items: res.map((v): D => this.repository.entityToDto(v)),
     }));
 
-  public getOne = (idOrOptions: string | FindOneOptions<E>) =>
-    !idOrOptions
+  public async getOne(idOrOptions: string | IGetOneOptions<E>) {
+    const result = await (!idOrOptions
       ? Promise.resolve({ item: <D>null })
       : this.repository.findOne(typeof idOrOptions === 'string' ? <FindOneOptions>{ where: { id: idOrOptions } } : idOrOptions).then(res => ({
           item: this.repository.entityToDto(res),
-        }));
+        })));
+
+    if (!result.item && typeof idOrOptions !== 'string' && idOrOptions.reject) {
+      throw new NotFoundError({
+        entityName: this.repository.metadata.tableName,
+      });
+    }
+
+    return result;
+  }
 
   public delete = (idOrOptions: string | string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
     this.repository

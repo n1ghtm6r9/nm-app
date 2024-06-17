@@ -402,10 +402,10 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.4.tgz#48b196fa96d43c6f064509b305ab637006730710"
   integrity sha512-1pQlvx9D0ZXb1Zx1kOBw3BR/p4abOlcb4kLyXuXve8haXzf50nWd0rUSFlOEZhOLGzkk+KTw/9QSufi8Zm60Eg==
 
-"@nmxjs/errors@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.7.tgz#31353d3851a22f2c1336baf89fd58a08c8494b20"
-  integrity sha512-46xUikv5ORdbHDf6zc2y+qt7F6DRxYFskh9UI+rt/V00WnoKIKewXl4Ge6uT2SHkGLRtqMvmlQ4GWeT487QCzg==
+"@nmxjs/errors@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.9.tgz#15021908a8c75a18f3c7775cbcc12bd81dfd6603"
+  integrity sha512-UizQ8RWn5FoZQ6LD0zR8tKrY/x86Y5uNx7AbRUi5tgqLOMIQqmoR3X2tLwh/jhFzhGJl0jo/x0NE/yJ7G84nWA==
   dependencies:
     "@nestjs/microservices" "^10.2.10"
 

@@ -115,12 +115,24 @@ export class CrudService<E extends object, D extends object> {
       items: res.map((v): D => this.repository.entityToDto(v)),
     }));
 
-  public async getOne(idOrOptions: string | IGetOneOptions<E>) {
+  public async getOne(idOrOptions: string | IGetOneOptions<E, D>) {
     const result = await (!idOrOptions
       ? Promise.resolve({ item: <D>null })
-      : this.repository.findOne(typeof idOrOptions === 'string' ? <FindOneOptions>{ where: { id: idOrOptions } } : idOrOptions).then(res => ({
-          item: this.repository.entityToDto(res),
-        })));
+      : this.repository
+          .findOne(
+            typeof idOrOptions === 'string'
+              ? <FindOneOptions>{ where: { id: idOrOptions } }
+              : (() => {
+                  const { dtoSelect, ...options } = idOrOptions;
+                  return {
+                    ...options,
+                    ...(dtoSelect?.length ? { select: dtoSelect.map((v: any): any => camelToSnakeCase(v)) } : {}),
+                  };
+                })(),
+          )
+          .then(res => ({
+            item: this.repository.entityToDto(res),
+          })));
 
     if (!result.item && typeof idOrOptions !== 'string' && idOrOptions.reject) {
       throw new NotFoundError({

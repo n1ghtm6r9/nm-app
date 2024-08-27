@@ -38,7 +38,7 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
 
   const microserviceApps = [
     ...(transporterOptions ? [app.connectMicroservice<MicroserviceOptions>(transporterOptions, { inheritAppConfig: true })] : []),
-    ...(eventsOptions && eventsOptions.transport !== transporterOptions.transport
+    ...(eventsOptions && transporterOptions && eventsOptions.transport !== transporterOptions.transport
       ? [app.connectMicroservice<MicroserviceOptions>(eventsOptions, { inheritAppConfig: true })]
       : []),
   ];

@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.87",
+  "version": "1.0.88",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@apollo/server": "^4.9.5",
     "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
+    "@graphql-tools/utils": "^10.5.4",
     "@nestjs/core": "^10.3.0",
     "@nestjs/microservices": "^10.3.0",
     "@nestjs/testing": "^10.3.4",

@@ -1,6 +1,7 @@
 import { DynamicModule } from '@nestjs/common';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
+import { pruneSchema } from '@graphql-tools/utils';
 import { IGetGraphQlModuleOptions, IGetGraphQlModuleUseFactoryResult } from './interfaces';
 
 const { ApolloDriver } = require('@nestjs/apollo');
@@ -21,6 +22,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
       }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
       return {
         autoSchemaFile: true,
+        transformSchema: pruneSchema,
         installSubscriptionHandlers: true,
         playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
         fieldResolverEnhancers: ['filters', 'guards', 'interceptors'],

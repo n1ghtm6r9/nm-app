@@ -175,10 +175,12 @@ export class CrudService<E extends object, D extends object> {
       const field = camelToSnakeCase(v.field);
 
       const value =
-        parseJson({
-          data: v.value,
-          arrayValid: true,
-        }) || v.value;
+        typeof v.value !== 'string'
+          ? v.value
+          : parseJson({
+              data: v.value,
+              arrayValid: true,
+            }) || v.value;
 
       if (value === 'null') {
         res[field] = v.not ? Not(IsNull()) : IsNull();

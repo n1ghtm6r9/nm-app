@@ -45,16 +45,16 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
             ? { message: eval(`eval(${error.message.substring(unexpectedErrorMessage.length)})`).message }
             : {}),
         }),
-        ...(onSubscriptionConnect || onSubscriptionDisconnect
-          ? {
-              subscriptions: {
-                'subscriptions-transport-ws': {
-                  ...(onSubscriptionConnect ? { onConnect: onSubscriptionConnect } : {}),
-                  ...(onSubscriptionDisconnect ? { onDisconnect: onSubscriptionDisconnect } : {}),
-                },
-              },
-            }
-          : {}),
+        subscriptions: {
+          'subscriptions-transport-ws': {
+            onConnect: (connectionParams, client) => ({
+              client,
+              connectionParams,
+              ...(onSubscriptionConnect ? onSubscriptionConnect(connectionParams, client) : {}),
+            }),
+            ...(onSubscriptionDisconnect ? { onDisconnect: onSubscriptionDisconnect } : {}),
+          },
+        },
         context: ctx => ({
           req: ctx.req,
           res: ctx.res,

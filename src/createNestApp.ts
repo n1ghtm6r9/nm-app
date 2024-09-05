@@ -12,6 +12,7 @@ import { isWorkerApp, getEnvironment, parseJson } from '@nmxjs/utils';
 import { ICreateNestAppOptions } from './interfaces';
 import { logAppStarted } from './logAppStarted';
 import { GqlExceptionFilter } from './GqlExceptionFilter';
+import { checkIsGraphQlModuleExits } from './getGraphQlModule';
 
 export async function createNestApp({ service, module, http }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
@@ -54,7 +55,11 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
         }) || '*',
       credentials: true,
     });
-    app.useGlobalFilters(new GqlExceptionFilter());
+
+    if (checkIsGraphQlModuleExits()) {
+      app.useGlobalFilters(new GqlExceptionFilter());
+    }
+
     await app.listen(port);
     Logger.log(`Http service ${service} started on port "${port}"!`);
   } else {

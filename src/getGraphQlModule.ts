@@ -9,6 +9,10 @@ const { GraphQLModule } = require('@nestjs/graphql');
 
 const unexpectedErrorMessage = 'Unexpected error value: ';
 
+let isGraphQlModuleExits = false;
+
+export const checkIsGraphQlModuleExits = () => isGraphQlModuleExits;
+
 export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicModule =>
   GraphQLModule.forRootAsync({
     ...(options?.inject?.length ? { inject: options.inject } : {}),
@@ -20,6 +24,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         onSubscriptionConnect,
         onSubscriptionDisconnect,
       }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
+      isGraphQlModuleExits = true;
       return {
         autoSchemaFile: true,
         transformSchema: pruneSchema,

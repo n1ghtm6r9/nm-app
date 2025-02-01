@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { ClientsModule, Transport, ClientProxy } from '@nestjs/microservices';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 export async function createTestNestApp(module: Parameters<typeof Test.createTestingModule>[0]) {
   const clientKey = Symbol('CLIENT_KEY');
@@ -16,7 +16,7 @@ export async function createTestNestApp(module: Parameters<typeof Test.createTes
   await app.startAllMicroservices();
   await app.init();
 
-  const client = app.get<ClientProxy>(clientKey);
+  const client = app.get(clientKey);
   await client.connect();
 
   return {

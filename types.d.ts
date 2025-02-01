@@ -1,3 +1,20 @@
+declare module '@nestjs/typeorm' {
+  class TypeOrmModule {
+    static forRootAsync: any;
+  }
+
+  type TypeOrmModuleOptions = {};
+}
+declare module '@nestjs/core' {
+  class NestFactory {}
+}
+
+declare module '@nestjs/testing' {
+  class Test {
+    static createTestingModule(options: { imports: any[] }): any;
+  }
+}
+
 declare module '@nmxjs/config' {
   interface IConfig {
     event?: any;

@@ -14,6 +14,9 @@ declare module '@nestjs/testing' {
     static createTestingModule(options: { imports: any[] }): any;
   }
 }
+declare module '@graphql-tools/utils' {
+  const pruneSchema: any;
+}
 
 declare module '@nmxjs/config' {
   interface IConfig {

@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.93",
+  "version": "1.0.94",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,21 +26,15 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@apollo/server": "^4.9.5",
-    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
-    "@graphql-tools/utils": "^10.5.4",
     "@nmxjs/constants": "^1.0.4",
     "@nmxjs/errors": "^1.0.9",
     "@nmxjs/utils": "^1.0.14",
-    "apollo-server-express": "^3.10.2",
     "compression": "^1.7.4",
-    "graphql": "^16.6.0",
-    "graphql-subscriptions": "^3.0.0",
-    "graphql-type-json": "^0.3.2",
-    "graphql-upload-ts": "^2.1.2",
     "graphql-ws": "^6.0.3",
     "helmet": "^8.0.0",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "graphql": "^16.6.0",
+    "graphql-upload-ts": "^2.1.2"
   },
   "peerDependencies": {
     "@nestjs/core": "^11.0.7",
@@ -52,6 +46,13 @@
     "@nmxjs/api": "^1.1.16",
     "@nmxjs/config": "^1.0.8",
     "@nmxjs/events": "^1.0.9",
-    "@nmxjs/types": "^1.0.15"
+    "@nmxjs/types": "^1.0.15",
+    "@nestjs/platform-express": "^11.0.7",
+    "apollo-server-express": "^3.10.2",
+    "@apollo/server": "^4.9.5",
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
+    "graphql-subscriptions": "^3.0.0",
+    "graphql-type-json": "^0.3.2",
+    "@graphql-tools/utils": "^10.5.4"
   }
 }

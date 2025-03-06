@@ -14,11 +14,6 @@
     wrap-ansi "^8.1.0"
     wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
 
-"@lukeed/csprng@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@lukeed/csprng/-/csprng-1.1.0.tgz#1e3e4bd05c1cc7a0b2ddbd8a03f39f6e4b5e6cfe"
-  integrity sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==
-
 "@mapbox/node-pre-gyp@^1.0.11":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.11.tgz#417db42b7f5323d79e93b34a6d7a2a12c0df43fa"
@@ -34,23 +29,6 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
-"@nestjs/common@^10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-10.3.0.tgz#d78f0ff2062d1d53c79c170a79c12a1548e2e598"
-  integrity sha512-DGv34UHsZBxCM3H5QGE2XE/+oLJzz5+714JQjBhjD9VccFlQs3LRxo/epso4l7nJIiNlZkPyIUC8WzfU/5RTsQ==
-  dependencies:
-    uid "2.0.2"
-    iterare "1.2.1"
-    tslib "2.6.2"
-
-"@nestjs/microservices@^10.2.10":
-  version "10.3.5"
-  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-10.3.5.tgz#9da30f2525a7bbdc1b824cce62bd40ffb24f743b"
-  integrity sha512-zL+8Yg2uCoCbb7KzgAYPGt+W6shAI5Ac/0ls3zoyjK2VtHcSgzLwKQWY48QbhzoDWQzVqCtCAWH0yuCxTqTNQw==
-  dependencies:
-    iterare "1.2.1"
-    tslib "2.6.2"
-
 "@nmxjs/constants@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
@@ -61,25 +39,22 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.4.tgz#48b196fa96d43c6f064509b305ab637006730710"
   integrity sha512-1pQlvx9D0ZXb1Zx1kOBw3BR/p4abOlcb4kLyXuXve8haXzf50nWd0rUSFlOEZhOLGzkk+KTw/9QSufi8Zm60Eg==
 
-"@nmxjs/errors@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.9.tgz#15021908a8c75a18f3c7775cbcc12bd81dfd6603"
-  integrity sha512-UizQ8RWn5FoZQ6LD0zR8tKrY/x86Y5uNx7AbRUi5tgqLOMIQqmoR3X2tLwh/jhFzhGJl0jo/x0NE/yJ7G84nWA==
-  dependencies:
-    "@nestjs/microservices" "^10.2.10"
+"@nmxjs/errors@1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.12.tgz#e67e7897b431bd3c0a190fe9ffe87440bd389818"
+  integrity sha512-JZrTQ5Ka7dBY1fmjGB5wloyc+PQPUdJQJw1ZcfY3YZ7AVlbb55a3VBNnBx8mfbURurltMv4TM7s6nzyaM2IipA==
 
-"@nmxjs/utils@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.14.tgz#cdd8b76648662849e71c496fa893d60828f9a31c"
-  integrity sha512-W7BTYo4lj1238mFBZjo9301cisQcSx2uvYLj6lKUdSQjmnhqk5nmojfqQGCb2GT6uV7DK3pGpKXg3nmTh9xPig==
+"@nmxjs/utils@1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.22.tgz#8ffb67bf31eea3fac00d005178f7ef3e7a092b4f"
+  integrity sha512-6sLu3B2oZ7phgxslp7rvPQmPZyiSVJ4CQF3YxwPOaka0QvGpkz02AOfmLwot3kJA3Nh79MsSJZVeg/6KZNremw==
   dependencies:
-    "@nestjs/common" "^10.3.0"
     "@nmxjs/constants" "^1.0.1"
     bcrypt "^5.1.1"
     big.js "^6.2.1"
     moment "^2.29.4"
     rxjs "^7.8.1"
-    uuid "^9.0.1"
+    uuid "^11.1.0"
     yaml "^2.3.4"
 
 "@pkgjs/parseargs@^0.11.0":
@@ -529,11 +504,6 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-iterare@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/iterare/-/iterare-1.2.1.tgz#139c400ff7363690e33abffa33cbba8920f00042"
-  integrity sha512-RKYVTCjAnRthyJes037NX/IiqeidgN1xc3j1RjFfECFp28A1GVwK9nA+i0rJPaHqSZwygLzRnFlzUuHFoWWy+Q==
-
 jackspeak@^2.3.5:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/jackspeak/-/jackspeak-2.3.6.tgz#647ecc472238aee4b06ac0e461acc21a8c505ca8"
@@ -925,7 +895,7 @@ tr46@~0.0.3:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
 
-tslib@2.6.2, tslib@^2.1.0, tslib@^2.5.0:
+tslib@^2.1.0, tslib@^2.5.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.2.tgz#703ac29425e7b37cd6fd456e92404d46d1f3e4ae"
   integrity sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==
@@ -956,13 +926,6 @@ typescript@^5.1.6:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.3.3.tgz#b3ce6ba258e72e6305ba66f5c9b452aaee3ffe37"
   integrity sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==
 
-uid@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/uid/-/uid-2.0.2.tgz#4b5782abf0f2feeefc00fa88006b2b3b7af3e3b9"
-  integrity sha512-u3xV3X7uzvi5b1MncmZo3i2Aw222Zk1keqLA1YkHldREkAhAqi65wuPfe7lHx8H/Wzy+8CE7S7uS3jekIM5s8g==
-  dependencies:
-    "@lukeed/csprng" "^1.0.0"
-
 undici-types@~6.20.0:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-6.20.0.tgz#8171bf22c1f588d1554d55bf204bc624af388433"
@@ -973,7 +936,12 @@ util-deprecate@^1.0.1:
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-uuid@^9.0.0, uuid@^9.0.1:
+uuid@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.0.tgz#9549028be1753bb934fc96e2bca09bb4105ae912"
+  integrity sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==
+
+uuid@^9.0.0:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==

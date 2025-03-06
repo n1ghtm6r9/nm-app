@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.94",
+  "version": "1.0.95",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@nmxjs/constants": "^1.0.4",
-    "@nmxjs/errors": "^1.0.9",
-    "@nmxjs/utils": "^1.0.14",
+    "@nmxjs/errors": "1.0.12",
+    "@nmxjs/utils": "1.0.22",
     "compression": "^1.7.4",
     "graphql-ws": "^6.0.3",
     "helmet": "^8.0.0",
@@ -43,6 +43,7 @@
     "@nestjs/typeorm": "^11.0.0",
     "@nestjs/apollo": "^13.0.2",
     "@nestjs/graphql": "^13.0.2",
+    "@nestjs/common": "^10.3.0",
     "@nmxjs/api": "^1.1.16",
     "@nmxjs/config": "^1.0.8",
     "@nmxjs/events": "^1.0.9",

@@ -1,3 +1,41 @@
+declare module '@nestjs/microservices' {
+  class ClientsModule {
+    static register(data);
+  }
+
+  interface MicroserviceOptions {}
+
+  enum Transport {
+    TCP,
+  }
+}
+
+declare module '@nestjs/common' {
+  interface INestApplication {
+    get<T>(data);
+    connectMicroservice<T>(first, second);
+    [key: string]: any;
+  }
+
+  class Logger {
+    static log(str);
+  }
+
+  class ModuleMetadata {
+    imports: any[];
+  }
+
+  interface ExceptionFilter {}
+
+  const Catch = (): ClassDecorator => {};
+
+  class NotFoundException {
+    message: string;
+  }
+
+  class DynamicModule {}
+}
+
 declare module '@nestjs/typeorm' {
   class TypeOrmModule {
     static forRootAsync: any;
@@ -5,6 +43,7 @@ declare module '@nestjs/typeorm' {
 
   type TypeOrmModuleOptions = {};
 }
+
 declare module '@nestjs/core' {
   class NestFactory {}
 }

@@ -105,3 +105,10 @@ declare module '@nmxjs/types' {
     SEARCH,
   }
 }
+
+declare module '@nmxjs/notifications' {
+  const notifierKey: string;
+  interface INotifier {
+    sendError(error: Error): void;
+  }
+}

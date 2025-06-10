@@ -13,6 +13,7 @@ import { ICreateNestAppOptions } from './interfaces';
 import { logAppStarted } from './logAppStarted';
 import { GqlExceptionFilter } from './GqlExceptionFilter';
 import { checkIsGraphQlModuleExits } from './getGraphQlModule';
+import { notifierKey } from '@nmxjs/notifications';
 
 export async function createNestApp({ service, module, http }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
@@ -29,9 +30,8 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
 
   const port = process.env.PORT || 3000;
 
-  if (process.env.DEBUG === 'true') {
-    app.useGlobalInterceptors(new RpcExceptionInterceptor());
-  }
+  const notifier = app.get(notifierKey);
+  app.useGlobalInterceptors(new RpcExceptionInterceptor(process.env.DEBUG === 'true'), notifier);
 
   const config = app.get<IConfig>(configKey);
   const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
@@ -57,7 +57,7 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
     });
 
     if (checkIsGraphQlModuleExits()) {
-      app.useGlobalFilters(new GqlExceptionFilter());
+      app.useGlobalFilters(new GqlExceptionFilter(notifier));
     }
 
     await app.listen(port);

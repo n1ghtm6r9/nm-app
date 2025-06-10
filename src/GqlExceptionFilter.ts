@@ -1,10 +1,17 @@
 import { GraphQLError } from 'graphql';
 import { ExceptionFilter, Catch, NotFoundException } from '@nestjs/common';
 import { AlreadyExistError } from '@nmxjs/errors';
+import type { INotifier } from '@nmxjs/notifications';
 
 @Catch()
 export class GqlExceptionFilter implements ExceptionFilter {
+  constructor(private readonly notifier?: INotifier) {}
+
   public catch(error, host) {
+    if (this.notifier) {
+      this.notifier.sendError(error);
+    }
+
     if (error.code === '23505') {
       error = new AlreadyExistError();
     }

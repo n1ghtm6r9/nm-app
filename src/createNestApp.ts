@@ -13,7 +13,7 @@ import { ICreateNestAppOptions } from './interfaces';
 import { logAppStarted } from './logAppStarted';
 import { GqlExceptionFilter } from './GqlExceptionFilter';
 import { checkIsGraphQlModuleExits } from './getGraphQlModule';
-import { notifierKey } from '@nmxjs/notifications';
+import { notifierKey, isNotifierEnabled } from '@nmxjs/notifications';
 
 export async function createNestApp({ service, module, http }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
@@ -30,7 +30,7 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
 
   const port = process.env.PORT || 3000;
 
-  const notifier = app.get(notifierKey);
+  const notifier = isNotifierEnabled() ? app.get(notifierKey) : null;
   app.useGlobalInterceptors(new RpcExceptionInterceptor(process.env.DEBUG === 'true'), notifier);
 
   const config = app.get<IConfig>(configKey);

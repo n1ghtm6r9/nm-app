@@ -12,7 +12,7 @@ declare module '@nestjs/microservices' {
 
 declare module '@nestjs/common' {
   interface INestApplication {
-    get<T>(data);
+    get<T>(data, options?);
     connectMicroservice<T>(first, second);
     [key: string]: any;
   }
@@ -108,6 +108,7 @@ declare module '@nmxjs/types' {
 
 declare module '@nmxjs/notifications' {
   const notifierKey: string;
+  const isNotifierEnabled: () => boolean;
   interface INotifier {
     sendError(error: Error): void;
   }

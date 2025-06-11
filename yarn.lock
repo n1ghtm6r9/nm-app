@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.4.tgz#48b196fa96d43c6f064509b305ab637006730710"
   integrity sha512-1pQlvx9D0ZXb1Zx1kOBw3BR/p4abOlcb4kLyXuXve8haXzf50nWd0rUSFlOEZhOLGzkk+KTw/9QSufi8Zm60Eg==
 
-"@nmxjs/errors@1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.12.tgz#e67e7897b431bd3c0a190fe9ffe87440bd389818"
-  integrity sha512-JZrTQ5Ka7dBY1fmjGB5wloyc+PQPUdJQJw1ZcfY3YZ7AVlbb55a3VBNnBx8mfbURurltMv4TM7s6nzyaM2IipA==
+"@nmxjs/errors@1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.13.tgz#d678594fa01208dae29680026debdc9f2584f4d9"
+  integrity sha512-QdCfwt9RwCCA278/CO47J9fWy3Ux5k3JQ66bwj8jc35lBlMFzc/dkLcbTAvgysMdwmPRNxt3L6qZfT0I+zB2HQ==
 
 "@nmxjs/utils@1.0.22":
   version "1.0.22"

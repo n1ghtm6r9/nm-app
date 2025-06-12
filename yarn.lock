@@ -34,10 +34,10 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.1.tgz#b3af8d336e2c04f2bf8edd5d4a9c614cf00a50cb"
   integrity sha512-JoGvXqUq2CM/YsqjqmQTcascnY6ui9xecBTRgkFsQicw78PqCdXt0/fYfK4D4nWVcyrWDxjMG9d5YhIR3dt2GA==
 
-"@nmxjs/constants@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.4.tgz#48b196fa96d43c6f064509b305ab637006730710"
-  integrity sha512-1pQlvx9D0ZXb1Zx1kOBw3BR/p4abOlcb4kLyXuXve8haXzf50nWd0rUSFlOEZhOLGzkk+KTw/9QSufi8Zm60Eg==
+"@nmxjs/constants@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@nmxjs/constants/-/constants-1.0.6.tgz#4b5ffe45fb2679d5e2aa5c037cf76fa6e29cf59c"
+  integrity sha512-j5WShQa0ZdzLrcMyi7Nh7qii3lM9ZnCf2JzCVrAYFgsCQsKAH9wENvKi7cd2Kph71E9wDEUoMi/Q8DFETkVBvg==
 
 "@nmxjs/errors@1.0.13":
   version "1.0.13"

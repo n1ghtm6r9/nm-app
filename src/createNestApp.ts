@@ -14,6 +14,7 @@ import { logAppStarted } from './logAppStarted';
 import { GqlExceptionFilter } from './GqlExceptionFilter';
 import { checkIsGraphQlModuleExits } from './getGraphQlModule';
 import { notifierKey, isNotifierEnabled } from '@nmxjs/notifications';
+import { nestAppStartedKey } from '@nmxjs/constants';
 
 export async function createNestApp({ service, module, http }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
@@ -71,4 +72,6 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
   if (microserviceApps.length > 0) {
     logAppStarted(service);
   }
+
+  process.env[nestAppStartedKey] = 'true';
 }

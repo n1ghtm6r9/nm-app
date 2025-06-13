@@ -44,14 +44,14 @@
   resolved "https://registry.yarnpkg.com/@nmxjs/errors/-/errors-1.0.13.tgz#d678594fa01208dae29680026debdc9f2584f4d9"
   integrity sha512-QdCfwt9RwCCA278/CO47J9fWy3Ux5k3JQ66bwj8jc35lBlMFzc/dkLcbTAvgysMdwmPRNxt3L6qZfT0I+zB2HQ==
 
-"@nmxjs/utils@1.0.22":
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.0.22.tgz#8ffb67bf31eea3fac00d005178f7ef3e7a092b4f"
-  integrity sha512-6sLu3B2oZ7phgxslp7rvPQmPZyiSVJ4CQF3YxwPOaka0QvGpkz02AOfmLwot3kJA3Nh79MsSJZVeg/6KZNremw==
+"@nmxjs/utils@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@nmxjs/utils/-/utils-1.1.4.tgz#c0b38b107e3136e00410f1e4ea9d335f7f3e4b41"
+  integrity sha512-0CYLlx1nzOzazKURV3wOyURxaK0Mdi4tNNWYvxBsJDM6cDXOavRtReF776Su1aX7EMKluHbeoIlsvV2jpEAIEg==
   dependencies:
     "@nmxjs/constants" "^1.0.1"
     bcrypt "^5.1.1"
-    big.js "^6.2.1"
+    graphql "^16.11.0"
     moment "^2.29.4"
     rxjs "^7.8.1"
     uuid "^11.1.0"
@@ -156,11 +156,6 @@ bcrypt@^5.1.1:
   dependencies:
     "@mapbox/node-pre-gyp" "^1.0.11"
     node-addon-api "^5.0.0"
-
-big.js@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/big.js/-/big.js-6.2.1.tgz#7205ce763efb17c2e41f26f121c420c6a7c2744f"
-  integrity sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -431,6 +426,11 @@ graphql-ws@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-6.0.3.tgz#8f20ee60f900650411be476f507bda5ff9b0844e"
   integrity sha512-mvLRHihMg0llF74vo16063HufZHMGaiMxAjzyj0ARYueIikGzj1khlbPNl7vUc2h9rxbq9pGpQYbqypgq1fAXA==
+
+graphql@^16.11.0:
+  version "16.11.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.11.0.tgz#96d17f66370678027fdf59b2d4c20b4efaa8a633"
+  integrity sha512-mS1lbMsxgQj6hge1XZ6p7GPhbrtFwUFYi3wRzXAC/FmYnyXMTvvI3td3rjmQ2u8ewXueaSvRPWaEcgVVOT9Jnw==
 
 graphql@^16.6.0:
   version "16.10.0"

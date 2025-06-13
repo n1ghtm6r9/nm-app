@@ -109,7 +109,14 @@ declare module '@nmxjs/types' {
 declare module '@nmxjs/notifications' {
   const notifierKey: string;
   const isNotifierEnabled: () => boolean;
+  interface INotificationSendErrorOptions {
+    message: string;
+    code: string;
+    params?: Record<string, unknown>;
+    serviceName?: string;
+    path?: string;
+  }
   interface INotifier {
-    sendError(error: Error): void;
+    sendError(options: INotificationSendErrorOptions): void;
   }
 }

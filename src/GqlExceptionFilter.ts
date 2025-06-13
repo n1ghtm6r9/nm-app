@@ -2,10 +2,11 @@ import { GraphQLError } from 'graphql';
 import { ExceptionFilter, Catch, NotFoundException } from '@nestjs/common';
 import { AlreadyExistError } from '@nmxjs/errors';
 import type { INotifier } from '@nmxjs/notifications';
+import { getPathFromGraphQl } from '@nmxjs/utils';
 
 @Catch()
 export class GqlExceptionFilter implements ExceptionFilter {
-  constructor(private readonly notifier?: INotifier) {}
+  constructor(private readonly serviceName: string, private readonly notifier?: INotifier) {}
 
   public catch(error, host) {
     if (error.code === '23505') {
@@ -19,7 +20,13 @@ export class GqlExceptionFilter implements ExceptionFilter {
     }
 
     if (this.notifier && !error.silent) {
-      this.notifier.sendError(error);
+      this.notifier.sendError({
+        params: host.args[1],
+        message: error.message.split('\n    at')[0],
+        code: error.code,
+        path: getPathFromGraphQl(host.args[2].req.body.query),
+        serviceName: this.serviceName,
+      });
     }
 
     throw new GraphQLError(error.message, {

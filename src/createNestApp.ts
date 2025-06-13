@@ -30,9 +30,8 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
   }
 
   const port = process.env.PORT || 3000;
-
   const notifier = isNotifierEnabled() ? app.get(notifierKey) : null;
-  app.useGlobalInterceptors(new RpcExceptionInterceptor(process.env.DEBUG === 'true'), notifier);
+  app.useGlobalInterceptors(new RpcExceptionInterceptor(service, process.env.DEBUG === 'true', notifier));
 
   const config = app.get<IConfig>(configKey);
   const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
@@ -58,7 +57,7 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
     });
 
     if (checkIsGraphQlModuleExits()) {
-      app.useGlobalFilters(new GqlExceptionFilter(notifier));
+      app.useGlobalFilters(new GqlExceptionFilter(service, notifier));
     }
 
     await app.listen(port);

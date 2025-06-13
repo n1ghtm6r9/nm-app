@@ -21,11 +21,11 @@ export class GqlExceptionFilter implements ExceptionFilter {
 
     if (this.notifier && !error.silent) {
       this.notifier.sendError({
-        params: host.args[1],
         message: error.message.split('\n    at')[0],
-        code: error.code,
-        path: getPathFromGraphQl(host.args[2].req.body.query),
         serviceName: this.serviceName,
+        path: getPathFromGraphQl(host.args[2].req.body.query),
+        code: error.code || 'UNKNOWN GQL',
+        params: host.args[1],
       });
     }
 

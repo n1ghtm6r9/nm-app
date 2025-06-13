@@ -5,7 +5,7 @@ export async function createTestNestHttpApp(module: Parameters<typeof Test.creat
   const moduleRef = await Test.createTestingModule(module).compile();
   const app = moduleRef.createNestApplication();
 
-  app.useGlobalFilters(new GqlExceptionFilter());
+  app.useGlobalFilters(new GqlExceptionFilter('test', null));
 
   await app.init();
 

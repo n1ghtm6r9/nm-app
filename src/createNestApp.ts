@@ -46,7 +46,12 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
 
   if (http) {
     app.use(compression());
-    app.use(graphqlUploadExpress());
+    app.use(
+      graphqlUploadExpress({
+        maxFiles: 10,
+        maxFileSize: 52428800,
+      }),
+    );
     app.enableCors({
       origin:
         parseJson({

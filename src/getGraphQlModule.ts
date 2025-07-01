@@ -26,6 +26,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
       }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
       isGraphQlModuleExits = true;
       return {
+        uploads: false,
         autoSchemaFile: true,
         transformSchema: pruneSchema,
         installSubscriptionHandlers: true,

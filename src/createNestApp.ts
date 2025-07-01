@@ -15,6 +15,7 @@ import { GqlExceptionFilter } from './GqlExceptionFilter';
 import { checkIsGraphQlModuleExits } from './getGraphQlModule';
 import { notifierKey, isNotifierEnabled } from '@nmxjs/notifications';
 import { nestAppStartedKey } from '@nmxjs/constants';
+import { json, urlencoded } from 'body-parser';
 
 export async function createNestApp({ service, module, http }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
@@ -46,6 +47,8 @@ export async function createNestApp({ service, module, http }: ICreateNestAppOpt
 
   if (http) {
     app.use(compression());
+    app.use(json({ limit: '100mb' }));
+    app.use(urlencoded({ limit: '100mb', extended: true }));
     app.use(
       graphqlUploadExpress({
         maxFiles: 10,

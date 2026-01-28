@@ -76,7 +76,7 @@ export async function createNestApp({ service, module, http, excludeUploadPaths 
     });
 
     if (checkIsGraphQlModuleExits()) {
-      app.useGlobalFilters(new GqlExceptionFilter(service, notifier));
+      app.useGlobalFilters(new GqlExceptionFilter(service, notifier, excludeUploadPaths));
     }
 
     await app.listen(port);

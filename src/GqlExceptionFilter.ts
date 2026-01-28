@@ -6,17 +6,33 @@ import { getPathFromGraphQl } from '@nmxjs/utils';
 
 @Catch()
 export class GqlExceptionFilter implements ExceptionFilter {
-  constructor(private readonly serviceName: string, private readonly notifier?: INotifier) {}
+  constructor(
+    private readonly serviceName: string,
+    private readonly notifier?: INotifier,
+    private readonly excludeUploadPaths?: string[],
+  ) {}
+
+  private isExcludedPath(path: string): boolean {
+    return this.excludeUploadPaths?.some(pattern => {
+      if (pattern.includes('*')) {
+        const regex = new RegExp('^' + pattern.replace(/\*/g, '[^/]+') + '$');
+        return regex.test(path);
+      }
+      return path === pattern || path.startsWith(pattern);
+    });
+  }
 
   public catch(error, host) {
     if (error.code === '23505') {
       error = new AlreadyExistError();
     }
 
-    if (error instanceof NotFoundException) {
-      const ctx = host.switchToHttp();
-      const res = ctx.getResponse();
-      return res.status(404).json({ message: { statusCode: 404, error: 'Not Found', message: error.message } });
+    const ctx = host.switchToHttp();
+    const req = ctx.getRequest();
+    const res = ctx.getResponse();
+
+    if (error instanceof NotFoundException || this.isExcludedPath(req?.path)) {
+      return res.status(error.statusCode || 404).json({ message: error.message, code: error.code });
     }
 
     if (this.notifier && !error.silent) {

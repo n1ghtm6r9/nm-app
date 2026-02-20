@@ -40,7 +40,7 @@ export async function createNestApp({ service, module, http, excludeUploadPaths 
 
   const microserviceApps = [
     ...(transporterOptions ? [app.connectMicroservice<MicroserviceOptions>(transporterOptions, { inheritAppConfig: true })] : []),
-    ...(eventsOptions && transporterOptions && eventsOptions.transport !== transporterOptions.transport
+    ...(eventsOptions && (!transporterOptions || eventsOptions.transport !== transporterOptions.transport)
       ? [app.connectMicroservice<MicroserviceOptions>(eventsOptions, { inheritAppConfig: true })]
       : []),
   ];

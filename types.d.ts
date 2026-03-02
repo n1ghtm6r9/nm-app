@@ -76,6 +76,7 @@ declare module '@nmxjs/config' {
 declare module '@nmxjs/api' {
   const RpcExceptionInterceptor: any;
   const getTransporterOptionsKey: string;
+  function parseRpcError(e: any): Error;
   type GetTransporterOptions = (
     serviceName: string,
   ) => Exclude<import('@nestjs/microservices').MicroserviceOptions, import('@nestjs/microservices').CustomStrategy>;

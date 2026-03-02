@@ -3,6 +3,7 @@ import { ExceptionFilter, Catch, NotFoundException } from '@nestjs/common';
 import { AlreadyExistError } from '@nmxjs/errors';
 import type { INotifier } from '@nmxjs/notifications';
 import { getPathFromGraphQl } from '@nmxjs/utils';
+import { parseRpcError } from '@nmxjs/api';
 
 @Catch()
 export class GqlExceptionFilter implements ExceptionFilter {
@@ -23,6 +24,8 @@ export class GqlExceptionFilter implements ExceptionFilter {
   }
 
   public catch(error, host) {
+    error = parseRpcError(error);
+
     if (error.code === '23505') {
       error = new AlreadyExistError();
     }

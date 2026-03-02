@@ -1,6 +1,6 @@
 {
   "name": "@nmxjs/app",
-  "version": "1.0.108",
+  "version": "1.0.109",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -50,7 +50,6 @@
     "@nestjs/platform-express": "^11.0.7",
     "@nestjs/testing": "^11.0.7",
     "@nestjs/typeorm": "^11.0.0",
-    "@nmxjs/api": "^1.2.17",
     "@nmxjs/config": "^1.0.8",
     "@nmxjs/events": "^1.0.9",
     "@nmxjs/notifications": "^1.0.10",

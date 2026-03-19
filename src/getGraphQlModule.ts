@@ -30,7 +30,7 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         autoSchemaFile: true,
         transformSchema: pruneSchema,
         installSubscriptionHandlers: true,
-        playground: getEnvironment() !== EnvironmentEnum.PRODUCTION,
+        graphiql: getEnvironment() !== EnvironmentEnum.PRODUCTION,
         fieldResolverEnhancers: ['filters', 'guards', 'interceptors'],
         resolvers,
         status400ForVariableCoercionErrors: true,
@@ -38,8 +38,8 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
           ...(error.extensions.exception?.error?.code
             ? { code: error.extensions.exception.error.code }
             : error.extensions.code
-            ? { code: error.extensions.code }
-            : {}),
+              ? { code: error.extensions.code }
+              : {}),
           ...(error.extensions.exception?.thrownValue?.code ? { code: error.extensions.exception.thrownValue.code } : {}),
           message:
             error.extensions.exception?.error?.message ||

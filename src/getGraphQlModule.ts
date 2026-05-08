@@ -23,10 +23,12 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         resolvers = {},
         onSubscriptionConnect,
         onSubscriptionDisconnect,
+        config = {},
       }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
       isGraphQlModuleExits = true;
       return {
         uploads: false,
+        autoTransformHttpErrors: false,
         autoSchemaFile: true,
         transformSchema: pruneSchema,
         installSubscriptionHandlers: true,
@@ -65,6 +67,8 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
           req: ctx.req,
           res: ctx.res,
         }),
+        ...(options?.config ?? {}),
+        ...(config ?? {}),
       };
     },
   });

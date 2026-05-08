@@ -3,5 +3,6 @@ import { IGetGraphQlModuleUseFactoryResult } from './IGetGraphQlModuleUseFactory
 
 export interface IGetGraphQlModuleOptions extends Pick<ModuleMetadata, 'imports'> {
   inject?: Array<string | symbol>;
-  useFactory: (...params) => IGetGraphQlModuleUseFactoryResult | Promise<IGetGraphQlModuleUseFactoryResult>;
+  config?: Record<string, any>;
+  useFactory?: (...params) => IGetGraphQlModuleUseFactoryResult | Promise<IGetGraphQlModuleUseFactoryResult>;
 }

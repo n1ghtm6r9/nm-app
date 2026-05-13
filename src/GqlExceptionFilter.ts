@@ -13,14 +13,17 @@ export class GqlExceptionFilter implements ExceptionFilter {
     private readonly excludeUploadPaths?: string[],
   ) {}
 
-  private isExcludedPath(path: string): boolean {
-    return this.excludeUploadPaths?.some(pattern => {
-      if (pattern.includes('*')) {
-        const regex = new RegExp('^' + pattern.replace(/\*/g, '[^/]+') + '$');
-        return regex.test(path);
-      }
-      return path === pattern || path.startsWith(pattern);
-    });
+  private isExcludedPath(path: string | undefined): boolean {
+    if (!path) return false;
+    return (
+      this.excludeUploadPaths?.some(pattern => {
+        if (pattern.includes('*')) {
+          const regex = new RegExp('^' + pattern.replace(/\*/g, '[^/]+') + '$');
+          return regex.test(path);
+        }
+        return path === pattern || path.startsWith(pattern);
+      }) ?? false
+    );
   }
 
   public catch(error, host) {

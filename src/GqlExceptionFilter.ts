@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql';
-import { ExceptionFilter, Catch, NotFoundException } from '@nestjs/common';
+import { ExceptionFilter, Catch, NotFoundException, Logger } from '@nestjs/common';
 import { AlreadyExistError } from '@nmxjs/errors';
 import type { INotifier } from '@nmxjs/notifications';
 import { getPathFromGraphQl } from '@nmxjs/utils';
@@ -28,6 +28,10 @@ export class GqlExceptionFilter implements ExceptionFilter {
 
   public catch(error, host) {
     error = parseRpcError(error);
+
+    if (process.env.DEBUG === 'true') {
+      Logger.debug(`GqlExceptionFilter caught: ${error.message}\n${error.stack}`);
+    }
 
     if (error.code === '23505') {
       error = new AlreadyExistError();

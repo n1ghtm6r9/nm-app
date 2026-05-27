@@ -19,6 +19,7 @@ declare module '@nestjs/common' {
 
   class Logger {
     static log(str);
+    static debug(str);
   }
 
   class ModuleMetadata {

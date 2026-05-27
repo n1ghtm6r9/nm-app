@@ -1,4 +1,5 @@
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Logger } from '@nestjs/common';
 import { IConfig, configKey } from '@nmxjs/config';
 import { ensureDatabase } from './ensureDatabase';
 
@@ -7,6 +8,10 @@ export const getTypeOrmModule = (options?: Partial<TypeOrmModuleOptions>) =>
     useFactory: async (config: IConfig) => {
       if (config.db?.type === 'postgres') {
         await ensureDatabase(config.db);
+      }
+
+      if (process.env.DEBUG === 'true') {
+        Logger.debug(`TypeORM connecting: ${config.db?.type}://${config.db?.host}:${config.db?.port}/${config.db?.database}`);
       }
 
       return {

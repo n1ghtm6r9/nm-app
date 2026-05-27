@@ -1,5 +1,6 @@
 import { camelToSnakeCase, clearUndefined, parseJson } from '@nmxjs/utils';
 import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
+import { Logger } from '@nestjs/common';
 import {
   Raw,
   Not,
@@ -44,6 +45,10 @@ export class CrudService<E extends object, D extends object> {
       }));
 
   public async update(idOrOptions: string | FindOptionsWhere<E> | FindOptionsWhere<E>[], payload: Partial<E>) {
+    if (process.env.DEBUG === 'true') {
+      Logger.debug(`CrudService.update table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
+    }
+
     if (!idOrOptions || !Object.values(payload).length) {
       return {
         ok: false,
@@ -77,6 +82,10 @@ export class CrudService<E extends object, D extends object> {
     };
   }
   public async updateAndGet(idOrOptions: string | FindOptionsWhere<E> | FindOptionsWhere<E>[], payload: Partial<E>) {
+    if (process.env.DEBUG === 'true') {
+      Logger.debug(`CrudService.updateAndGet table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
+    }
+
     if (!idOrOptions || !Object.values(payload).length) {
       return {
         ok: false,
@@ -116,6 +125,10 @@ export class CrudService<E extends object, D extends object> {
     }));
 
   public async getOne(idOrOptions: string | IGetOneOptions<E, D>) {
+    if (process.env.DEBUG === 'true') {
+      Logger.debug(`CrudService.getOne table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
+    }
+
     const result = await (!idOrOptions
       ? Promise.resolve({ item: <D>null })
       : this.repository
@@ -151,8 +164,8 @@ export class CrudService<E extends object, D extends object> {
         typeof idOrOptions === 'string'
           ? { id: idOrOptions }
           : Array.isArray(idOrOptions) && typeof idOrOptions[0] === 'string'
-          ? { id: In(<string[]>idOrOptions) }
-          : idOrOptions,
+            ? { id: In(<string[]>idOrOptions) }
+            : idOrOptions,
       )
       .execute()
       .then(res => ({
@@ -161,6 +174,10 @@ export class CrudService<E extends object, D extends object> {
 
   public async list({ filters = [], pagination, sorts, ...options }: ICrudListOptions<E> = {}): Promise<ListResponseDto<D>> {
     const page = pagination?.page || 1;
+
+    if (process.env.DEBUG === 'true') {
+      Logger.debug(`CrudService.list table=${this.repository.metadata.tableName} page=${page} filters=${filters.length}`);
+    }
     const limit = pagination?.limit || paginationLimit;
 
     const findOptions: FindManyOptions<E> = {

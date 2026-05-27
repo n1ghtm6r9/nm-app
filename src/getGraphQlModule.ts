@@ -1,4 +1,4 @@
-import { DynamicModule } from '@nestjs/common';
+import { DynamicModule, Logger } from '@nestjs/common';
 import { getEnvironment } from '@nmxjs/utils';
 import { EnvironmentEnum } from '@nmxjs/types';
 import { pruneSchema } from '@graphql-tools/utils';
@@ -26,6 +26,11 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         config = {},
       }: IGetGraphQlModuleUseFactoryResult = options?.useFactory ? await options.useFactory(...params) : {};
       isGraphQlModuleExits = true;
+
+      if (process.env.DEBUG === 'true') {
+        Logger.debug(`GraphQL module initialized, resolvers: ${Object.keys(resolvers).join(', ') || 'none'}`);
+      }
+
       return {
         uploads: false,
         autoTransformHttpErrors: false,

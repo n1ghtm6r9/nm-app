@@ -30,13 +30,19 @@ export async function createNestApp({ service, module, http, excludeUploadPaths 
     app.use(helmet());
   }
 
+  const isDebug = process.env.DEBUG === 'true';
   const port = process.env.PORT || 3000;
   const notifier = isNotifierEnabled() ? app.get(notifierKey) : null;
-  app.useGlobalInterceptors(new RpcExceptionInterceptor(service, process.env.DEBUG === 'true', notifier));
+  app.useGlobalInterceptors(new RpcExceptionInterceptor(service, isDebug, notifier));
 
   const config = app.get<IConfig>(configKey);
   const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
   const transporterOptions = app.get<GetTransporterOptions>(getTransporterOptionsKey)(service);
+
+  if (isDebug) {
+    Logger.debug(`transporterOptions: ${JSON.stringify(transporterOptions)}`);
+    Logger.debug(`eventsOptions: ${JSON.stringify(eventsOptions)}`);
+  }
 
   const microserviceApps = [
     ...(transporterOptions ? [app.connectMicroservice<MicroserviceOptions>(transporterOptions, { inheritAppConfig: true })] : []),
@@ -49,6 +55,14 @@ export async function createNestApp({ service, module, http, excludeUploadPaths 
     app.use(compression());
     app.use(json({ limit: '100mb' }));
     app.use(urlencoded({ limit: '100mb', extended: true }));
+    if (isDebug) {
+      app.use((req, res, next) => {
+        const start = Date.now();
+        Logger.debug(`HTTP --> ${req.method} ${req.path} body: ${JSON.stringify(req.body)}`);
+        res.on('finish', () => Logger.debug(`HTTP <-- ${req.method} ${req.path} ${res.statusCode} (${Date.now() - start}ms)`));
+        next();
+      });
+    }
     app.use((req, res, next) => {
       if (
         excludeUploadPaths?.some(pattern => {

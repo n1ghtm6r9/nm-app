@@ -41,8 +41,9 @@ export class GqlExceptionFilter implements ExceptionFilter {
     const req = ctx.getRequest();
     const res = ctx.getResponse();
 
-    if (error instanceof NotFoundException || this.isExcludedPath(req?.path)) {
-      return res.status(error.statusCode || 404).json({ message: error.message, code: error.code });
+    const isHttpError = typeof error?.getStatus === 'function';
+    if (isHttpError || error instanceof NotFoundException || this.isExcludedPath(req?.path)) {
+      return res.status(isHttpError ? error.getStatus() : error.statusCode || 404).json({ message: error.message, code: error.code });
     }
 
     if (this.notifier && !error.silent) {
@@ -56,11 +57,12 @@ export class GqlExceptionFilter implements ExceptionFilter {
       });
     }
 
+    const status = error.statusCode || error.status || 500;
+    if (host.getType() === 'http') {
+      return res.status(status).json({ message: error.message || 'Internal server error', ...(error.code ? { code: error.code } : {}) });
+    }
     throw new GraphQLError(error.message, {
-      extensions: {
-        code: error.code,
-        http: { status: error.statusCode || 500 },
-      },
+      extensions: { code: error.code, http: { status: error.statusCode || 500 } },
     });
   }
 }

@@ -52,7 +52,7 @@ export class GqlExceptionFilter implements ExceptionFilter {
         serviceName: this.serviceName,
         path: query ? getPathFromGraphQl(query) : undefined,
         code: error.code || 'UNKNOWN GQL',
-        params: host.args[1],
+        params: host.args[1]?.req === host.args[0] ? undefined : host.args[1],
       });
     }
 

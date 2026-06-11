@@ -17,7 +17,7 @@ import { notifierKey, isNotifierEnabled } from '@nmxjs/notifications';
 import { nestAppStartedKey } from '@nmxjs/constants';
 import { json, urlencoded } from 'body-parser';
 
-export async function createNestApp({ service, module, http, excludeUploadPaths }: ICreateNestAppOptions) {
+export async function createNestApp({ service, module, http, excludeUploadPaths, graphqlPath = '/graphql' }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
   const app = <INestApplication>await NestFactory[isWorker ? 'createApplicationContext' : 'create'](module);
 
@@ -64,21 +64,13 @@ export async function createNestApp({ service, module, http, excludeUploadPaths 
       });
     }
     app.use((req, res, next) => {
-      if (
-        excludeUploadPaths?.some(pattern => {
-          if (pattern.includes('*')) {
-            const regex = new RegExp('^' + pattern.replace(/\*/g, '[^/]+') + '$');
-            return regex.test(req.path);
-          }
-          return req.path === pattern || req.path.startsWith(pattern);
-        })
-      ) {
-        return next();
+      if (req.path === graphqlPath || req.path.startsWith(graphqlPath + '/')) {
+        return graphqlUploadExpress({
+          maxFiles: 10,
+          maxFileSize: 52428800,
+        })(req, res, next);
       }
-      graphqlUploadExpress({
-        maxFiles: 10,
-        maxFileSize: 52428800,
-      })(req, res, next);
+      next();
     });
     app.enableCors({
       origin:

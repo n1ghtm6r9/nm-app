@@ -3,4 +3,5 @@ export interface ICreateNestAppOptions {
   service: string;
   http?: boolean;
   excludeUploadPaths?: string[];
+  graphqlPath?: string;
 }

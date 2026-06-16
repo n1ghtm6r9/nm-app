@@ -18,6 +18,7 @@ import type { ICrudListOptions, IGetOneOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 import { paginationLimit } from '@nmxjs/constants';
 import { NotFoundError } from '@nmxjs/errors';
+import { isValidUUID } from './isValidUUID';
 
 export class CrudService<E extends object, D extends object> {
   constructor(protected readonly repository: ExtraRepository<E, D>) {}
@@ -50,6 +51,12 @@ export class CrudService<E extends object, D extends object> {
     }
 
     if (!idOrOptions || !Object.values(payload).length) {
+      return {
+        ok: false,
+      };
+    }
+
+    if (typeof idOrOptions === 'string' && !isValidUUID(idOrOptions)) {
       return {
         ok: false,
       };
@@ -92,6 +99,12 @@ export class CrudService<E extends object, D extends object> {
       };
     }
 
+    if (typeof idOrOptions === 'string' && !isValidUUID(idOrOptions)) {
+      return {
+        ok: false,
+      };
+    }
+
     const item = await this.repository
       .createQueryBuilder()
       .update()
@@ -129,6 +142,12 @@ export class CrudService<E extends object, D extends object> {
       Logger.debug(`CrudService.getOne table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
     }
 
+    if (typeof idOrOptions === 'string' && !isValidUUID(idOrOptions)) {
+      return {
+        item: <D>null,
+      };
+    }
+
     const result = await (!idOrOptions
       ? Promise.resolve({ item: <D>null })
       : this.repository
@@ -156,8 +175,16 @@ export class CrudService<E extends object, D extends object> {
     return result;
   }
 
-  public delete = (idOrOptions: string | string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) =>
-    this.repository
+  public delete = (idOrOptions: string | string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) => {
+    if (typeof idOrOptions === 'string' && !isValidUUID(idOrOptions)) {
+      return Promise.resolve({ ok: false });
+    }
+
+    if (Array.isArray(idOrOptions) && typeof idOrOptions[0] === 'string' && idOrOptions.some(v => typeof v === 'string' && !isValidUUID(v))) {
+      return Promise.resolve({ ok: false });
+    }
+
+    return this.repository
       .createQueryBuilder()
       .delete()
       .where(
@@ -171,6 +198,7 @@ export class CrudService<E extends object, D extends object> {
       .then(res => ({
         ok: res.affected > 0,
       }));
+  };
 
   public async list({ filters = [], pagination, sorts, ...options }: ICrudListOptions<E> = {}): Promise<ListResponseDto<D>> {
     const page = pagination?.page || 1;
@@ -214,7 +242,7 @@ export class CrudService<E extends object, D extends object> {
       } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
         res[field] = MoreThanOrEqual(value);
       } else if (v.operator === FilterOperatorEnum.SEARCH) {
-        res[field] = Raw(alias => `LOWER(${alias})${v.not ? 'NOT' : ''} LIKE :value`, {
+        res[field] = Raw(alias => `LOWER(${alias}::text)${v.not ? 'NOT' : ''} LIKE :value`, {
           value: `${value}%`.toLowerCase(),
         });
       }

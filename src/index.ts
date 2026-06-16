@@ -9,3 +9,4 @@ export * from './ExtraRepository';
 export * from './GqlExceptionFilter';
 export * from './createTestNestHttpApp';
 export * from './ensureDatabase';
+export * from './isValidUUID';

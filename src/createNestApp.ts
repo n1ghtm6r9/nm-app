@@ -19,11 +19,23 @@ import { json, urlencoded } from 'body-parser';
 
 export async function createNestApp({ service, module, http, excludeUploadPaths, graphqlPath = '/graphql' }: ICreateNestAppOptions) {
   const isWorker = isWorkerApp();
-  const app = <INestApplication>await NestFactory[isWorker ? 'createApplicationContext' : 'create'](module);
+  const app = <INestApplication>await NestFactory['create'](module);
 
   if (isWorker) {
     await app.init();
-    return logAppStarted(service);
+
+    if (process.env.WORKER_EVENTS === 'true') {
+      const config = app.get<IConfig>(configKey);
+      const eventsOptions = config.event ? app.get<IEventsClient>(eventsClientKey).options : null;
+      if (eventsOptions) {
+        const eventsApp = app.connectMicroservice<MicroserviceOptions>(eventsOptions, { inheritAppConfig: true });
+        await eventsApp.listen();
+      }
+    }
+
+    logAppStarted(service);
+    process.env[nestAppStartedKey] = 'true';
+    return;
   }
 
   if (http && getEnvironment() === EnvironmentEnum.PRODUCTION) {

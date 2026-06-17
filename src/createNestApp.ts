@@ -23,6 +23,7 @@ export async function createNestApp({ service, module, http, excludeUploadPaths,
 
   if (isWorker) {
     await app.init();
+    app.get(getTransporterOptionsKey);
 
     if (process.env.WORKER_EVENTS === 'true') {
       const config = app.get<IConfig>(configKey);

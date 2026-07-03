@@ -47,13 +47,13 @@ export class GqlExceptionFilter implements ExceptionFilter {
     }
 
     if (this.notifier && !error.silent) {
-      const query = host.args?.[2]?.req?.body?.query;
+      const query = req?.body?.query;
       this.notifier.sendError({
         message: error.message.split('\n    at')[0],
         serviceName: this.serviceName,
-        path: query ? getPathFromGraphQl(query) : undefined,
+        path: query ? getPathFromGraphQl(query) : req?.url,
         code: error.code || 'UNKNOWN GQL',
-        params: host.args[1]?.req === host.args[0] ? undefined : host.args[1],
+        params: req?.body ?? undefined,
       });
     }
 

@@ -40,7 +40,6 @@ export const getGraphQlModule = (options?: IGetGraphQlModuleOptions): DynamicMod
         graphiql: getEnvironment() !== EnvironmentEnum.PRODUCTION,
         fieldResolverEnhancers: ['filters', 'guards', 'interceptors'],
         resolvers,
-        status400ForVariableCoercionErrors: true,
         formatError: (error: any) => ({
           ...(error.extensions.exception?.error?.code
             ? { code: error.extensions.exception.error.code }

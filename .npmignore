@@ -6,3 +6,5 @@ jest.config.js
 README.md
 .vscode
 **/.DS_Store
+.github
+

@@ -1,24 +1,15 @@
 import { camelToSnakeCase, clearUndefined, parseJson } from '@nmxjs/utils';
-import { FilterOperatorEnum, ListResponseDto } from '@nmxjs/types';
+import { ListResponseDto } from '@nmxjs/types';
 import { Logger } from '@nestjs/common';
-import {
-  Raw,
-  Not,
-  LessThan,
-  LessThanOrEqual,
-  MoreThan,
-  MoreThanOrEqual,
-  In,
-  FindOneOptions,
-  FindManyOptions,
-  FindOptionsWhere,
-  IsNull,
-} from 'typeorm';
+import { And, In, FindOneOptions, FindManyOptions, FindOptionsWhere } from 'typeorm';
 import type { ICrudListOptions, IGetOneOptions } from './interfaces';
 import type { ExtraRepository } from './ExtraRepository';
 import { paginationLimit } from '@nmxjs/constants';
 import { NotFoundError } from '@nmxjs/errors';
 import { isValidUUID } from './isValidUUID';
+import { getFilterCondition } from './getFilterCondition';
+import { toFindOperator } from './toFindOperator';
+import { isEmptyCondition } from './isEmptyCondition';
 
 export class CrudService<E extends object, D extends object> {
   constructor(protected readonly repository: ExtraRepository<E, D>) {}
@@ -50,7 +41,15 @@ export class CrudService<E extends object, D extends object> {
       Logger.debug(`CrudService.update table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
     }
 
-    if (!idOrOptions || !Object.values(payload).length) {
+    if (isEmptyCondition(idOrOptions)) {
+      return {
+        ok: false,
+      };
+    }
+
+    const values = clearUndefined(payload || {});
+
+    if (!Object.keys(values).length) {
       return {
         ok: false,
       };
@@ -72,7 +71,7 @@ export class CrudService<E extends object, D extends object> {
             }
           : idOrOptions,
       )
-      .set(<any>clearUndefined(payload))
+      .set(<any>values)
       .returning(['updated_at'])
       .execute()
       .then(res => res.raw[0]?.updated_at?.getTime());
@@ -93,7 +92,15 @@ export class CrudService<E extends object, D extends object> {
       Logger.debug(`CrudService.updateAndGet table=${this.repository.metadata.tableName} id=${JSON.stringify(idOrOptions)}`);
     }
 
-    if (!idOrOptions || !Object.values(payload).length) {
+    if (isEmptyCondition(idOrOptions)) {
+      return {
+        ok: false,
+      };
+    }
+
+    const values = clearUndefined(payload || {});
+
+    if (!Object.keys(values).length) {
       return {
         ok: false,
       };
@@ -115,7 +122,7 @@ export class CrudService<E extends object, D extends object> {
             }
           : idOrOptions,
       )
-      .set(<any>clearUndefined(payload))
+      .set(<any>values)
       .returning('*')
       .execute()
       .then(res => res.raw[0]);
@@ -148,7 +155,9 @@ export class CrudService<E extends object, D extends object> {
       };
     }
 
-    const result = await (!idOrOptions
+    const hasCondition = typeof idOrOptions === 'string' ? !!idOrOptions : !isEmptyCondition(idOrOptions?.where);
+
+    const result = await (!hasCondition
       ? Promise.resolve({ item: <D>null })
       : this.repository
           .findOne(
@@ -166,7 +175,7 @@ export class CrudService<E extends object, D extends object> {
             item: this.repository.entityToDto(res),
           })));
 
-    if (!result.item && typeof idOrOptions !== 'string' && idOrOptions.reject) {
+    if (!result.item && typeof idOrOptions !== 'string' && idOrOptions?.reject) {
       throw new NotFoundError({
         entityName: this.repository.metadata.tableName,
       });
@@ -176,6 +185,10 @@ export class CrudService<E extends object, D extends object> {
   }
 
   public delete = (idOrOptions: string | string[] | FindOptionsWhere<E> | FindOptionsWhere<E>[]) => {
+    if (isEmptyCondition(idOrOptions)) {
+      return Promise.resolve({ ok: false });
+    }
+
     if (typeof idOrOptions === 'string' && !isValidUUID(idOrOptions)) {
       return Promise.resolve({ ok: false });
     }
@@ -216,7 +229,7 @@ export class CrudService<E extends object, D extends object> {
       skip: Math.round((page - 1) * limit),
     };
 
-    let where = filters.reduce((res, v) => {
+    let where = filters.reduce((res, v, index) => {
       const field = camelToSnakeCase(v.field);
 
       const value =
@@ -227,28 +240,19 @@ export class CrudService<E extends object, D extends object> {
               arrayValid: true,
             }) || v.value;
 
-      if (value === 'null') {
-        res[field] = v.not ? Not(IsNull()) : IsNull();
-      } else if (v.operator === FilterOperatorEnum.EQ) {
-        res[field] = value;
-      } else if (v.operator === FilterOperatorEnum.IN) {
-        res[field] = In(value);
-      } else if (v.operator === FilterOperatorEnum.LESS) {
-        res[field] = LessThan(value);
-      } else if (v.operator === FilterOperatorEnum.LESS_OR_EQ) {
-        res[field] = LessThanOrEqual(value);
-      } else if (v.operator === FilterOperatorEnum.MORE) {
-        res[field] = MoreThan(value);
-      } else if (v.operator === FilterOperatorEnum.MORE_OR_EQ) {
-        res[field] = MoreThanOrEqual(value);
-      } else if (v.operator === FilterOperatorEnum.SEARCH) {
-        res[field] = Raw(alias => `LOWER(${alias}::text)${v.not ? 'NOT' : ''} LIKE :value`, {
-          value: `${value}%`.toLowerCase(),
-        });
-      }
+      const condition = getFilterCondition({
+        field,
+        index,
+        operator: v.operator,
+        not: v.not,
+        value,
+        rawValue: v.value,
+      });
 
-      if (v.not && v.operator !== FilterOperatorEnum.SEARCH && value !== 'null') {
-        res[field] = Not(res[v.field]);
+      if (condition !== undefined) {
+        res[field] = Object.prototype.hasOwnProperty.call(res, field)
+          ? And(toFindOperator(res[field]), toFindOperator(condition))
+          : condition;
       }
 
       return res;
@@ -259,7 +263,7 @@ export class CrudService<E extends object, D extends object> {
     });
 
     if (Array.isArray(findOptions.where)) {
-      findOptions.where = [...(Object.keys(where).length ? [where] : []), ...findOptions.where];
+      findOptions.where = findOptions.where.length ? findOptions.where.map(v => ({ ...where, ...v })) : where;
     } else if (findOptions.where) {
       findOptions.where = {
         ...where,

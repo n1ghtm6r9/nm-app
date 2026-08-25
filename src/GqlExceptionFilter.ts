@@ -27,7 +27,7 @@ export class GqlExceptionFilter implements ExceptionFilter {
   }
 
   public catch(error, host) {
-    error = parseRpcError(error);
+    error = parseRpcError(error) ?? new Error('Internal server error');
 
     if (process.env.DEBUG === 'true') {
       Logger.debug(`GqlExceptionFilter caught: ${error.message}\n${error.stack}`);
@@ -49,7 +49,7 @@ export class GqlExceptionFilter implements ExceptionFilter {
     if (this.notifier && !error.silent) {
       const query = req?.body?.query;
       this.notifier.sendError({
-        message: error.message.split('\n    at')[0],
+        message: (error.message || 'Internal server error').split('\n    at')[0],
         serviceName: this.serviceName,
         path: query ? getPathFromGraphQl(query) : req?.url,
         code: error.code || 'UNKNOWN GQL',
@@ -61,7 +61,7 @@ export class GqlExceptionFilter implements ExceptionFilter {
     if (host.getType() === 'http') {
       return res.status(status).json({ message: error.message || 'Internal server error', ...(error.code ? { code: error.code } : {}) });
     }
-    throw new GraphQLError(error.message, {
+    throw new GraphQLError(error.message || 'Internal server error', {
       extensions: { code: error.code, http: { status: error.statusCode || 500 } },
     });
   }

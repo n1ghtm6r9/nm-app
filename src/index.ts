@@ -10,3 +10,7 @@ export * from './GqlExceptionFilter';
 export * from './createTestNestHttpApp';
 export * from './ensureDatabase';
 export * from './isValidUUID';
+export * from './escapeLike';
+export * from './getFilterCondition';
+export * from './toFindOperator';
+export * from './isEmptyCondition';

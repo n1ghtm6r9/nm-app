@@ -4,9 +4,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 export async function createTestNestApp(module: Parameters<typeof Test.createTestingModule>[0]) {
   const clientKey = Symbol('CLIENT_KEY');
 
-  module.imports.push(ClientsModule.register([{ name: clientKey, transport: Transport.TCP }]));
-
-  const moduleFixture = await Test.createTestingModule(module).compile();
+  const moduleFixture = await Test.createTestingModule({
+    ...module,
+    imports: [...(module.imports ?? []), ClientsModule.register([{ name: clientKey, transport: Transport.TCP }])],
+  }).compile();
   const app = moduleFixture.createNestApplication();
 
   app.connectMicroservice({

@@ -61,8 +61,10 @@ export class GqlExceptionFilter implements ExceptionFilter {
     if (host.getType() === 'http') {
       return res.status(status).json({ message: error.message || 'Internal server error', ...(error.code ? { code: error.code } : {}) });
     }
+    const publicDetails = error.publicDetails && typeof error.publicDetails === 'object' ? error.publicDetails : {};
+
     throw new GraphQLError(error.message || 'Internal server error', {
-      extensions: { code: error.code, http: { status: error.statusCode || 500 } },
+      extensions: { ...publicDetails, code: error.code, http: { status: error.statusCode || 500 } },
     });
   }
 }
